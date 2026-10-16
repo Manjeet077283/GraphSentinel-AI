@@ -1,0 +1,130 @@
+[
+  {
+    "id": "SVC-API-GW",
+    "name": "API Gateway",
+    "description": "Central entry point handling SSL termination, rate limiting, and request routing.",
+    "criticality": "TIER_1",
+    "status": "DEGRADED",
+    "team": "Platform Engineering"
+  },
+  {
+    "id": "SVC-AUTH",
+    "name": "Authentication & Identity Service",
+    "description": "Handles OAuth2 tokens, JWT verification, session management, and SSO.",
+    "criticality": "TIER_1",
+    "status": "DEGRADED",
+    "team": "Security & Identity"
+  },
+  {
+    "id": "SVC-PAYMENT",
+    "name": "Payment Processing API",
+    "description": "Integrates with payment acquirers, processes credit card transactions and refunds.",
+    "criticality": "TIER_1",
+    "status": "CRITICAL",
+    "team": "Payments Engineering"
+  },
+  {
+    "id": "SVC-CHECKOUT",
+    "name": "Checkout Orchestrator",
+    "description": "Manages shopping cart finalization, taxes, promos, and payment delegation.",
+    "criticality": "TIER_1",
+    "status": "DEGRADED",
+    "team": "Commerce Core"
+  },
+  {
+    "id": "SVC-ORDER",
+    "name": "Order Management Service",
+    "description": "State machine for order lifecycle, receipt creation, and fulfillment tracking.",
+    "criticality": "TIER_1",
+    "status": "DEGRADED",
+    "team": "Commerce Core"
+  },
+  {
+    "id": "SVC-USER",
+    "name": "User Profile Service",
+    "description": "Manages customer preferences, addresses, and account metadata.",
+    "criticality": "TIER_2",
+    "status": "HEALTHY",
+    "team": "Identity & Accounts"
+  },
+  {
+    "id": "SVC-INVENTORY",
+    "name": "Inventory Tracking Service",
+    "description": "Real-time stock reservation, SKU counts, and warehouse availability.",
+    "criticality": "TIER_2",
+    "status": "HEALTHY",
+    "team": "Logistics Systems"
+  },
+  {
+    "id": "SVC-CATALOG",
+    "name": "Product Catalog Service",
+    "description": "Serves product metadata, pricing, categories, and media references.",
+    "criticality": "TIER_2",
+    "status": "HEALTHY",
+    "team": "Catalog Tech"
+  },
+  {
+    "id": "SVC-SEARCH",
+    "name": "Search & Recommendations Engine",
+    "description": "Elasticsearch & vector-based search, ranking, and personalized feeds.",
+    "criticality": "TIER_3",
+    "status": "HEALTHY",
+    "team": "Search & ML"
+  },
+  {
+    "id": "SVC-NOTIF",
+    "name": "Notification Dispatcher",
+    "description": "Dispatches transactional emails, SMS alerts, and push notifications via RabbitMQ.",
+    "criticality": "TIER_3",
+    "status": "DEGRADED",
+    "team": "Communications"
+  },
+  {
+    "id": "SVC-BILLING",
+    "name": "Billing & Invoicing Service",
+    "description": "Generates PDF tax invoices, records ledger entries, and handles subscription cycles.",
+    "criticality": "TIER_2",
+    "status": "DEGRADED",
+    "team": "Finance Tech"
+  },
+  {
+    "id": "SVC-FRAUD",
+    "name": "Fraud Detection Engine",
+    "description": "Real-time risk scoring, velocity checks, and anomaly detection for payments.",
+    "criticality": "TIER_1",
+    "status": "HEALTHY",
+    "team": "Risk & Compliance"
+  },
+  {
+    "id": "SVC-SHIPPING",
+    "name": "Shipping & Carrier Service",
+    "description": "Calculates shipping rates, generates tracking numbers with FedEx/UPS APIs.",
+    "criticality": "TIER_2",
+    "status": "HEALTHY",
+    "team": "Logistics Systems"
+  },
+  {
+    "id": "SVC-DISCOUNTS",
+    "name": "Discount & Coupon Engine",
+    "description": "Validates promotional codes, calculates basket markdowns, and tracks campaigns.",
+    "criticality": "TIER_3",
+    "status": "HEALTHY",
+    "team": "Marketing Tech"
+  },
+  {
+    "id": "SVC-REVIEWS",
+    "name": "Customer Reviews & Ratings",
+    "description": "Stores user feedback, star ratings, and moderation flags.",
+    "criticality": "TIER_4",
+    "status": "HEALTHY",
+    "team": "Community Experience"
+  },
+  {
+    "id": "SVC-ANALYTICS",
+    "name": "Telemetry & Event Streaming",
+    "description": "Ingests clickstream and server telemetry into Kafka topic partitions.",
+    "criticality": "TIER_4",
+    "status": "HEALTHY",
+    "team": "Data Platform"
+  }
+]

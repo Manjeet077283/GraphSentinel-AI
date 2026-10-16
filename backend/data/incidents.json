@@ -1,0 +1,422 @@
+[
+  {
+    "id": "INC-001",
+    "title": "Payment Gateway API Latency Spike & Gateway Timeout",
+    "description": "Payment Processing API experiencing p99 latency > 12000ms and connection timeouts during card authorization.",
+    "severity": "P1_CRITICAL",
+    "status": "OPEN",
+    "affected_service_id": "SVC-PAYMENT",
+    "created_at": "2026-10-16T10:30:00+00:00",
+    "updated_at": "2026-10-16T10:40:00+00:00"
+  },
+  {
+    "id": "INC-002",
+    "title": "Authentication Token Cache Connection Pool Exhaustion",
+    "description": "Redis cluster max connections threshold breached causing JWT token validation failures.",
+    "severity": "P1_CRITICAL",
+    "status": "OPEN",
+    "affected_service_id": "SVC-AUTH",
+    "created_at": "2026-10-16T09:30:00+00:00",
+    "updated_at": "2026-10-16T09:40:00+00:00"
+  },
+  {
+    "id": "INC-003",
+    "title": "Aurora PostgreSQL Connection Starvation on Payment DB",
+    "description": "Max connections reached on primary RDS cluster due to unclosed connection leak in billing webhook handler.",
+    "severity": "P1_CRITICAL",
+    "status": "INVESTIGATING",
+    "affected_service_id": "SVC-PAYMENT",
+    "created_at": "2026-10-16T08:30:00+00:00",
+    "updated_at": "2026-10-16T09:15:00+00:00"
+  },
+  {
+    "id": "INC-004",
+    "title": "Ingress 504 Gateway Timeout Cascade on Checkout Endpoint",
+    "description": "API Gateway returning 504 errors to frontend clients as downstream checkout calls stall.",
+    "severity": "P2_HIGH",
+    "status": "OPEN",
+    "affected_service_id": "SVC-API-GW",
+    "created_at": "2026-10-16T09:30:00+00:00",
+    "updated_at": "2026-10-16T09:40:00+00:00"
+  },
+  {
+    "id": "INC-005",
+    "title": "Order Events Kafka Consumer Lag & Queue Backlog",
+    "description": "Kafka consumer partition lag on topic 'order.created' exceeding 150,000 unconsumed messages.",
+    "severity": "P2_HIGH",
+    "status": "INVESTIGATING",
+    "affected_service_id": "SVC-ORDER",
+    "created_at": "2026-10-16T07:30:00+00:00",
+    "updated_at": "2026-10-16T08:15:00+00:00"
+  },
+  {
+    "id": "INC-006",
+    "title": "Notification Worker Pod OOMKilled Memory Pressure",
+    "description": "Email dispatch worker pods hitting 2Gi memory limits repeatedly during marketing blast.",
+    "severity": "P3_MEDIUM",
+    "status": "MITIGATED",
+    "affected_service_id": "SVC-NOTIF",
+    "created_at": "2026-10-16T05:30:00+00:00",
+    "updated_at": "2026-10-16T06:15:00+00:00"
+  },
+  {
+    "id": "INC-007",
+    "title": "Canary Deployment Regression in Fraud Scoring v2.4.1",
+    "description": "New ML scoring model throwing unhandled NullPointerExceptions on guest checkout payloads.",
+    "severity": "P2_HIGH",
+    "status": "RESOLVED",
+    "affected_service_id": "SVC-FRAUD",
+    "created_at": "2026-10-15T23:30:00+00:00",
+    "updated_at": "2026-10-16T00:15:00+00:00"
+  },
+  {
+    "id": "INC-008",
+    "title": "Cloudflare Upstream DNS Resolution Flapping",
+    "description": "Intermittent DNS resolution failures for payment gateway third-party acquirer endpoints.",
+    "severity": "P3_MEDIUM",
+    "status": "RESOLVED",
+    "affected_service_id": "SVC-API-GW",
+    "created_at": "2026-10-15T17:30:00+00:00",
+    "updated_at": "2026-10-15T18:15:00+00:00"
+  },
+  {
+    "id": "INC-009",
+    "title": "Checkout Orchestrator Thread Pool Saturation",
+    "description": "Tomcat thread pool exhaustion in Checkout Orchestrator caused by synchronous blocking HTTP calls to Payment API.",
+    "severity": "P1_CRITICAL",
+    "status": "OPEN",
+    "affected_service_id": "SVC-CHECKOUT",
+    "created_at": "2026-10-16T10:30:00+00:00",
+    "updated_at": "2026-10-16T10:40:00+00:00"
+  },
+  {
+    "id": "INC-010",
+    "title": "Billing Invoice PDF Generation Disk Spool Full",
+    "description": "Ephemeral disk space on billing containers exhausted by untruncated ghostscript temp logs.",
+    "severity": "P3_MEDIUM",
+    "status": "INVESTIGATING",
+    "affected_service_id": "SVC-BILLING",
+    "created_at": "2026-10-16T06:30:00+00:00",
+    "updated_at": "2026-10-16T07:15:00+00:00"
+  },
+  {
+    "id": "INC-011",
+    "title": "Inventory Lock Deadlock During Flash Sale Event",
+    "description": "Row-level deadlock on SKU inventory balances under concurrent cart reservation bursts.",
+    "severity": "P2_HIGH",
+    "status": "MITIGATED",
+    "affected_service_id": "SVC-INVENTORY",
+    "created_at": "2026-10-15T11:30:00+00:00",
+    "updated_at": "2026-10-15T12:15:00+00:00"
+  },
+  {
+    "id": "INC-012",
+    "title": "Product Catalog Elasticsearch Heap Pressure",
+    "description": "JVM garbage collection pauses > 8s on catalog search nodes causing search query timeouts.",
+    "severity": "P2_HIGH",
+    "status": "RESOLVED",
+    "affected_service_id": "SVC-SEARCH",
+    "created_at": "2026-10-14T23:30:00+00:00",
+    "updated_at": "2026-10-15T00:15:00+00:00"
+  },
+  {
+    "id": "INC-013",
+    "title": "User Profile Read Replica Replication Lag Spike",
+    "description": "Postgres read replica fell behind primary by 450 seconds during database vacuum process.",
+    "severity": "P3_MEDIUM",
+    "status": "RESOLVED",
+    "affected_service_id": "SVC-USER",
+    "created_at": "2026-10-14T11:30:00+00:00",
+    "updated_at": "2026-10-14T12:15:00+00:00"
+  },
+  {
+    "id": "INC-014",
+    "title": "Shipping Label Carrier API Rate Limit Exceeded",
+    "description": "FedEx OAuth token bucket exhausted due to uncached rate calculation retries.",
+    "severity": "P3_MEDIUM",
+    "status": "RESOLVED",
+    "affected_service_id": "SVC-SHIPPING",
+    "created_at": "2026-10-14T07:30:00+00:00",
+    "updated_at": "2026-10-14T08:15:00+00:00"
+  },
+  {
+    "id": "INC-015",
+    "title": "Coupon Engine Regex Denial of Service (ReDoS)",
+    "description": "Catastrophic backtracking on custom coupon wildcard validation pattern pinning CPU at 100%.",
+    "severity": "P2_HIGH",
+    "status": "RESOLVED",
+    "affected_service_id": "SVC-DISCOUNTS",
+    "created_at": "2026-10-13T23:30:00+00:00",
+    "updated_at": "2026-10-14T00:15:00+00:00"
+  },
+  {
+    "id": "INC-016",
+    "title": "Review Spam Filter False-Positive Trigger Storm",
+    "description": "Spam classification microservice rejected legitimate customer reviews due to outdated threshold model.",
+    "severity": "P4_LOW",
+    "status": "RESOLVED",
+    "affected_service_id": "SVC-REVIEWS",
+    "created_at": "2026-10-13T11:30:00+00:00",
+    "updated_at": "2026-10-13T12:15:00+00:00"
+  },
+  {
+    "id": "INC-017",
+    "title": "Payment Webhook Duplicate Processing Replay Storm",
+    "description": "Idempotency cache failure caused Stripe webhook retries to double-charge 14 transactions.",
+    "severity": "P1_CRITICAL",
+    "status": "RESOLVED",
+    "affected_service_id": "SVC-PAYMENT",
+    "created_at": "2026-10-13T03:30:00+00:00",
+    "updated_at": "2026-10-13T04:15:00+00:00"
+  },
+  {
+    "id": "INC-018",
+    "title": "Redis Cache Eviction Avalanche on User Sessions",
+    "description": "Volatile-LRU policy evicted active JWT refresh tokens leading to unexpected user logouts.",
+    "severity": "P2_HIGH",
+    "status": "RESOLVED",
+    "affected_service_id": "SVC-AUTH",
+    "created_at": "2026-10-12T11:30:00+00:00",
+    "updated_at": "2026-10-12T12:15:00+00:00"
+  },
+  {
+    "id": "INC-019",
+    "title": "Kafka Broker Disk Partition Exceeds 92% Threshold",
+    "description": "Retention policy misconfiguration on telemetry topic filled root volume on broker node 2.",
+    "severity": "P2_HIGH",
+    "status": "MITIGATED",
+    "affected_service_id": "SVC-ANALYTICS",
+    "created_at": "2026-10-16T01:30:00+00:00",
+    "updated_at": "2026-10-16T02:15:00+00:00"
+  },
+  {
+    "id": "INC-020",
+    "title": "RabbitMQ Notification Exchange Dead-Letter Spike",
+    "description": "Dead letter exchange received 5,000 failed push notifications due to expired Apple APNs cert.",
+    "severity": "P3_MEDIUM",
+    "status": "RESOLVED",
+    "affected_service_id": "SVC-NOTIF",
+    "created_at": "2026-10-11T21:30:00+00:00",
+    "updated_at": "2026-10-11T22:15:00+00:00"
+  },
+  {
+    "id": "INC-021",
+    "title": "Payment Acquirer TLS Certificate Rotation Failure",
+    "description": "Mutual TLS handshake failure between Payment Service and Visa Direct endpoint after cert rollover.",
+    "severity": "P1_CRITICAL",
+    "status": "RESOLVED",
+    "affected_service_id": "SVC-PAYMENT",
+    "created_at": "2026-10-11T01:30:00+00:00",
+    "updated_at": "2026-10-11T02:15:00+00:00"
+  },
+  {
+    "id": "INC-022",
+    "title": "ALB Target Group Health Check Flap on Checkout Pods",
+    "description": "Health check endpoint /health/ready returned HTTP 500 when database connection pool spiked.",
+    "severity": "P2_HIGH",
+    "status": "INVESTIGATING",
+    "affected_service_id": "SVC-CHECKOUT",
+    "created_at": "2026-10-16T04:30:00+00:00",
+    "updated_at": "2026-10-16T05:15:00+00:00"
+  },
+  {
+    "id": "INC-023",
+    "title": "Search Cluster Node Split-Brain Network Partition",
+    "description": "Inter-AZ network hiccup caused master node re-election loop in Elasticsearch cluster.",
+    "severity": "P2_HIGH",
+    "status": "RESOLVED",
+    "affected_service_id": "SVC-SEARCH",
+    "created_at": "2026-10-10T11:30:00+00:00",
+    "updated_at": "2026-10-10T12:15:00+00:00"
+  },
+  {
+    "id": "INC-024",
+    "title": "Database Migration Lock Stall on Order Schema Update",
+    "description": "Exclusive table lock on 'orders' table blocked incoming order insertions for 4 minutes.",
+    "severity": "P1_CRITICAL",
+    "status": "RESOLVED",
+    "affected_service_id": "SVC-ORDER",
+    "created_at": "2026-10-09T11:30:00+00:00",
+    "updated_at": "2026-10-09T12:15:00+00:00"
+  },
+  {
+    "id": "INC-025",
+    "title": "Memory Leak in User Profile Avatar Thumbnailer",
+    "description": "ImageMagick child process fork bomb caused worker node memory exhaustion.",
+    "severity": "P3_MEDIUM",
+    "status": "RESOLVED",
+    "affected_service_id": "SVC-USER",
+    "created_at": "2026-10-08T23:30:00+00:00",
+    "updated_at": "2026-10-09T00:15:00+00:00"
+  },
+  {
+    "id": "INC-026",
+    "title": "Discount Engine In-Memory Cache Desynchronization",
+    "description": "Local Guava cache failed to invalidate stale coupon codes across distributed pods.",
+    "severity": "P3_MEDIUM",
+    "status": "RESOLVED",
+    "affected_service_id": "SVC-DISCOUNTS",
+    "created_at": "2026-10-08T11:30:00+00:00",
+    "updated_at": "2026-10-08T12:15:00+00:00"
+  },
+  {
+    "id": "INC-027",
+    "title": "Notification SMS Provider Gateway Timeout Spike",
+    "description": "Twilio webhook responses degraded past 15s timeout causing dispatch worker backlog.",
+    "severity": "P3_MEDIUM",
+    "status": "OPEN",
+    "affected_service_id": "SVC-NOTIF",
+    "created_at": "2026-10-16T03:30:00+00:00",
+    "updated_at": "2026-10-16T03:40:00+00:00"
+  },
+  {
+    "id": "INC-028",
+    "title": "Inventory Delta Feed Truncation During Nightly Sync",
+    "description": "ERP batch ingestion script crashed at record 45,000 leaving warehouse balances out of date.",
+    "severity": "P2_HIGH",
+    "status": "RESOLVED",
+    "affected_service_id": "SVC-INVENTORY",
+    "created_at": "2026-10-07T17:30:00+00:00",
+    "updated_at": "2026-10-07T18:15:00+00:00"
+  },
+  {
+    "id": "INC-029",
+    "title": "Kubernetes Node NotReady Event Storm in Zone us-east-1a",
+    "description": "AWS EBS volume detach timeout left kubelet unresponsive across 4 worker nodes.",
+    "severity": "P1_CRITICAL",
+    "status": "RESOLVED",
+    "affected_service_id": "SVC-API-GW",
+    "created_at": "2026-10-06T11:30:00+00:00",
+    "updated_at": "2026-10-06T12:15:00+00:00"
+  },
+  {
+    "id": "INC-030",
+    "title": "Payment Card Token Vault HSM Latency Spike",
+    "description": "Hardware Security Module (HSM) decryption latency jumped from 20ms to 450ms.",
+    "severity": "P2_HIGH",
+    "status": "RESOLVED",
+    "affected_service_id": "SVC-PAYMENT",
+    "created_at": "2026-10-05T15:30:00+00:00",
+    "updated_at": "2026-10-05T16:15:00+00:00"
+  },
+  {
+    "id": "INC-031",
+    "title": "Order State Machine Race Condition on Concurrent Cancellations",
+    "description": "Optimistic concurrency check failed when customer cancelled order during automated warehouse pick.",
+    "severity": "P3_MEDIUM",
+    "status": "RESOLVED",
+    "affected_service_id": "SVC-ORDER",
+    "created_at": "2026-10-04T19:30:00+00:00",
+    "updated_at": "2026-10-04T20:15:00+00:00"
+  },
+  {
+    "id": "INC-032",
+    "title": "API Gateway JWT Secret Key Drift Across Canaries",
+    "description": "Canary pods loaded updated HMAC secret before baseline pods, causing intermittent 401 Unauthorized.",
+    "severity": "P2_HIGH",
+    "status": "RESOLVED",
+    "affected_service_id": "SVC-AUTH",
+    "created_at": "2026-10-03T23:30:00+00:00",
+    "updated_at": "2026-10-04T00:15:00+00:00"
+  },
+  {
+    "id": "INC-033",
+    "title": "Catalog Price CDN Stale Cache Serving Zero Dollar Items",
+    "description": "Surrogate-Key cache purge failed on regional POPs, displaying promotional price of $0.00.",
+    "severity": "P1_CRITICAL",
+    "status": "RESOLVED",
+    "affected_service_id": "SVC-CATALOG",
+    "created_at": "2026-10-03T03:30:00+00:00",
+    "updated_at": "2026-10-03T04:15:00+00:00"
+  },
+  {
+    "id": "INC-034",
+    "title": "Billing Recurring Charge Scheduler Clock Drift",
+    "description": "NTP daemon desync on cron worker triggered duplicate billing runs 1 hour early.",
+    "severity": "P2_HIGH",
+    "status": "RESOLVED",
+    "affected_service_id": "SVC-BILLING",
+    "created_at": "2026-10-02T07:30:00+00:00",
+    "updated_at": "2026-10-02T08:15:00+00:00"
+  },
+  {
+    "id": "INC-035",
+    "title": "Fraud Engine ML Model Drift Detecting 40% False Positives",
+    "description": "Unannounced bank BIN range shift triggered aggressive fraud blocks for valid European cards.",
+    "severity": "P2_HIGH",
+    "status": "RESOLVED",
+    "affected_service_id": "SVC-FRAUD",
+    "created_at": "2026-10-01T11:30:00+00:00",
+    "updated_at": "2026-10-01T12:15:00+00:00"
+  },
+  {
+    "id": "INC-036",
+    "title": "Carrier Tracking Webhook Ingestion Buffer Overflow",
+    "description": "UPS real-time tracking webhooks flooded ingestion buffer, dropping 12,000 delivery updates.",
+    "severity": "P3_MEDIUM",
+    "status": "RESOLVED",
+    "affected_service_id": "SVC-SHIPPING",
+    "created_at": "2026-09-30T15:30:00+00:00",
+    "updated_at": "2026-09-30T16:15:00+00:00"
+  },
+  {
+    "id": "INC-037",
+    "title": "Search Synonym Graph Loop Causing OutOfMemoryError",
+    "description": "Circular synonym expansion in search dictionary caused runaway recursive query generation.",
+    "severity": "P3_MEDIUM",
+    "status": "RESOLVED",
+    "affected_service_id": "SVC-SEARCH",
+    "created_at": "2026-09-29T19:30:00+00:00",
+    "updated_at": "2026-09-29T20:15:00+00:00"
+  },
+  {
+    "id": "INC-038",
+    "title": "Customer Reviews Moderation Queue SQS Backlog",
+    "description": "Image toxicity scanner microservice rate-limited by upstream third-party vision API.",
+    "severity": "P4_LOW",
+    "status": "RESOLVED",
+    "affected_service_id": "SVC-REVIEWS",
+    "created_at": "2026-09-28T23:30:00+00:00",
+    "updated_at": "2026-09-29T00:15:00+00:00"
+  },
+  {
+    "id": "INC-039",
+    "title": "Analytics Clickstream S3 Parquet Compaction Failure",
+    "description": "AWS Athena query latency spiked due to millions of small 4KB parquet files in cold storage.",
+    "severity": "P4_LOW",
+    "status": "RESOLVED",
+    "affected_service_id": "SVC-ANALYTICS",
+    "created_at": "2026-09-27T17:30:00+00:00",
+    "updated_at": "2026-09-27T18:15:00+00:00"
+  },
+  {
+    "id": "INC-040",
+    "title": "Payment 3D Secure Webhook Callback Timeout",
+    "description": "Issuer bank ACS iframe callback URLs failing due to strict SameSite cookie enforcement.",
+    "severity": "P2_HIGH",
+    "status": "OPEN",
+    "affected_service_id": "SVC-PAYMENT",
+    "created_at": "2026-10-16T02:30:00+00:00",
+    "updated_at": "2026-10-16T02:40:00+00:00"
+  },
+  {
+    "id": "INC-041",
+    "title": "Order Receipt PDF Generation Timeout During Peak Checkout",
+    "description": "Puppeteer headless browser renderer leaked Chromium zombies, consuming 100% pod CPU.",
+    "severity": "P3_MEDIUM",
+    "status": "INVESTIGATING",
+    "affected_service_id": "SVC-ORDER",
+    "created_at": "2026-10-16T00:30:00+00:00",
+    "updated_at": "2026-10-16T01:15:00+00:00"
+  },
+  {
+    "id": "INC-042",
+    "title": "API Gateway Global Rate Limiting Misconfiguration",
+    "description": "IP address extraction extracted load balancer private IP, throttling all incoming traffic globally.",
+    "severity": "P1_CRITICAL",
+    "status": "RESOLVED",
+    "affected_service_id": "SVC-API-GW",
+    "created_at": "2026-09-25T15:30:00+00:00",
+    "updated_at": "2026-09-25T16:15:00+00:00"
+  }
+]

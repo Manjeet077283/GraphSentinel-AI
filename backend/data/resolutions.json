@@ -1,0 +1,130 @@
+[
+  {
+    "id": "RES-001",
+    "incident_id": "INC-007",
+    "description": "Rolled back Fraud Detection Engine canary deployment from v2.4.1 to stable v2.4.0 via ArgoCD, and added null-check unit tests for guest checkout sessions.",
+    "outcome": "SUCCESS",
+    "effectiveness": "HIGH",
+    "applied_at": "2026-10-16T00:15:00+00:00"
+  },
+  {
+    "id": "RES-002",
+    "incident_id": "INC-008",
+    "description": "Overrode local CoreDNS upstream resolution to bypass failing recursive DNS cache and configured static fallback resolver 1.1.1.1 / 8.8.8.8.",
+    "outcome": "SUCCESS",
+    "effectiveness": "HIGH",
+    "applied_at": "2026-10-15T18:00:00+00:00"
+  },
+  {
+    "id": "RES-003",
+    "incident_id": "INC-012",
+    "description": "Doubled Elasticsearch JVM heap allocation from 16GB to 32GB and triggered shard rebalancing away from hot node es-data-03.",
+    "outcome": "SUCCESS",
+    "effectiveness": "HIGH",
+    "applied_at": "2026-10-15T00:30:00+00:00"
+  },
+  {
+    "id": "RES-004",
+    "incident_id": "INC-013",
+    "description": "Cancelled intensive long-running vacuum operation on read replica and reconfigured wal_keep_size to 8GB to prevent replication lag stalls.",
+    "outcome": "SUCCESS",
+    "effectiveness": "HIGH",
+    "applied_at": "2026-10-14T12:30:00+00:00"
+  },
+  {
+    "id": "RES-005",
+    "incident_id": "INC-014",
+    "description": "Implemented client-side Redis distributed rate limiter with local 60-second caching for carrier quote estimates, reducing outbound API calls by 85%.",
+    "outcome": "SUCCESS",
+    "effectiveness": "HIGH",
+    "applied_at": "2026-10-14T08:15:00+00:00"
+  },
+  {
+    "id": "RES-006",
+    "incident_id": "INC-015",
+    "description": "Hot-patched coupon regex engine with re2 non-backtracking regex library and set maximum input length to 32 characters on promo codes.",
+    "outcome": "SUCCESS",
+    "effectiveness": "HIGH",
+    "applied_at": "2026-10-14T00:20:00+00:00"
+  },
+  {
+    "id": "RES-007",
+    "incident_id": "INC-016",
+    "description": "Updated review spam classifier threshold from 0.70 to 0.88 and reprocessed 120 false-positive flagged reviews back into catalog.",
+    "outcome": "SUCCESS",
+    "effectiveness": "MEDIUM",
+    "applied_at": "2026-10-13T12:00:00+00:00"
+  },
+  {
+    "id": "RES-008",
+    "incident_id": "INC-017",
+    "description": "Patched Payment API idempotency key lock using Redis Redlock with 24-hour TTL and executed automated credit adjustment batch for all 14 affected customer accounts.",
+    "outcome": "SUCCESS",
+    "effectiveness": "HIGH",
+    "applied_at": "2026-10-13T04:45:00+00:00"
+  },
+  {
+    "id": "RES-009",
+    "incident_id": "INC-018",
+    "description": "Scaled Redis cluster from 3 shards to 6 shards and changed maxmemory-policy from volatile-lru to allkeys-lru with persistent key namespaces.",
+    "outcome": "SUCCESS",
+    "effectiveness": "HIGH",
+    "applied_at": "2026-10-12T12:30:00+00:00"
+  },
+  {
+    "id": "RES-010",
+    "incident_id": "INC-020",
+    "description": "Rotated expired Apple Push Notification Service (APNs) p12 certificate in production secret vault and restarted notification pods.",
+    "outcome": "SUCCESS",
+    "effectiveness": "HIGH",
+    "applied_at": "2026-10-11T22:00:00+00:00"
+  },
+  {
+    "id": "RES-011",
+    "incident_id": "INC-021",
+    "description": "Updated Java truststore cacerts with newly issued DigiCert Global Root G2 certificate and initiated rolling restart of Payment API pods.",
+    "outcome": "SUCCESS",
+    "effectiveness": "HIGH",
+    "applied_at": "2026-10-11T02:30:00+00:00"
+  },
+  {
+    "id": "RES-012",
+    "incident_id": "INC-023",
+    "description": "Enforced discovery.zen.minimum_master_nodes = 2 in Elasticsearch cluster configuration and migrated master nodes to dedicated AZ quorum nodes.",
+    "outcome": "SUCCESS",
+    "effectiveness": "HIGH",
+    "applied_at": "2026-10-10T12:00:00+00:00"
+  },
+  {
+    "id": "RES-013",
+    "incident_id": "INC-024",
+    "description": "Terminated blocking schema migration lock query, re-ran migration using pg-online-schema-change with lock_timeout = 2s, and added statement timeout guardrails.",
+    "outcome": "SUCCESS",
+    "effectiveness": "HIGH",
+    "applied_at": "2026-10-09T12:20:00+00:00"
+  },
+  {
+    "id": "RES-014",
+    "incident_id": "INC-028",
+    "description": "Updated ERP ingestion parser to handle UTF-8 replacement characters on unprintable bytes and configured auto-quarantine for corrupted records.",
+    "outcome": "SUCCESS",
+    "effectiveness": "HIGH",
+    "applied_at": "2026-10-07T18:15:00+00:00"
+  },
+  {
+    "id": "RES-015",
+    "incident_id": "INC-033",
+    "description": "Invalidated edge CDN cache tags globally via Cloudflare API, disabled zero-price checkout validation bypass, and contacted 38 customers regarding pricing error orders.",
+    "outcome": "PARTIAL_SUCCESS",
+    "effectiveness": "MEDIUM",
+    "applied_at": "2026-10-03T04:45:00+00:00"
+  },
+  {
+    "id": "RES-016",
+    "incident_id": "INC-042",
+    "description": "Fixed API Gateway client IP resolution by configuring 'use_remote_address: true' and X-Forwarded-For header indexing, whitelisting VPC CIDR ranges.",
+    "outcome": "SUCCESS",
+    "effectiveness": "HIGH",
+    "applied_at": "2026-09-25T16:30:00+00:00"
+  }
+]

@@ -1,0 +1,682 @@
+[
+  {
+    "id": "EVD-001",
+    "incident_id": "INC-001",
+    "source_type": "METRIC",
+    "description": "Payment API p99 latency spiked from 145ms to 12,850ms.",
+    "timestamp": "2026-10-16T10:35:00+00:00",
+    "metric_name": "http_request_duration_p99_ms",
+    "metric_value": 12850.0,
+    "unit": "ms"
+  },
+  {
+    "id": "EVD-002",
+    "incident_id": "INC-001",
+    "source_type": "LOG",
+    "description": "HikariPool-1 - Connection is not available, request timed out after 30005ms (total=50, active=50, idle=0, waiting=124)",
+    "timestamp": "2026-10-16T10:40:00+00:00",
+    "metric_name": "connection_pool_waiting",
+    "metric_value": 124.0,
+    "unit": "connections"
+  },
+  {
+    "id": "EVD-003",
+    "incident_id": "INC-001",
+    "source_type": "ALERT",
+    "description": "Datadog Alert: [CRITICAL] PaymentProcessingAPI error rate > 18.5% over 5m window",
+    "timestamp": "2026-10-16T10:45:00+00:00",
+    "metric_name": "http_5xx_error_percentage",
+    "metric_value": 18.5,
+    "unit": "percent"
+  },
+  {
+    "id": "EVD-004",
+    "incident_id": "INC-001",
+    "source_type": "TRACE",
+    "description": "Distributed trace 9f3e4a shows 92% of request time stalled in PostgreSQL query 'SELECT * FROM payment_methods WHERE customer_id = ? FOR UPDATE'",
+    "timestamp": "2026-10-16T10:50:00+00:00",
+    "metric_name": "span_duration_ms",
+    "metric_value": 11800.0,
+    "unit": "ms"
+  },
+  {
+    "id": "EVD-005",
+    "incident_id": "INC-002",
+    "source_type": "METRIC",
+    "description": "Redis cluster connected_clients reached maximum server capacity limit 10,000.",
+    "timestamp": "2026-10-16T09:40:00+00:00",
+    "metric_name": "redis_connected_clients",
+    "metric_value": 10000.0,
+    "unit": "clients"
+  },
+  {
+    "id": "EVD-006",
+    "incident_id": "INC-002",
+    "source_type": "LOG",
+    "description": "io.lettuce.core.RedisConnectionException: Unable to connect to redis-cluster-node-01.internal:6379 (ERR max number of clients reached)",
+    "timestamp": "2026-10-16T09:45:00+00:00",
+    "metric_name": null,
+    "metric_value": null,
+    "unit": null
+  },
+  {
+    "id": "EVD-007",
+    "incident_id": "INC-002",
+    "source_type": "ALERT",
+    "description": "PagerDuty: [P1] Authentication Service JWT verification failing with 500 status on /v1/auth/verify",
+    "timestamp": "2026-10-16T09:50:00+00:00",
+    "metric_name": "auth_failure_rate",
+    "metric_value": 42.0,
+    "unit": "percent"
+  },
+  {
+    "id": "EVD-008",
+    "incident_id": "INC-003",
+    "source_type": "METRIC",
+    "description": "AWS CloudWatch DatabaseConnections metric reached 1,980 out of 2,000 max_connections on INF-RDS-PAYMENT.",
+    "timestamp": "2026-10-16T08:40:00+00:00",
+    "metric_name": "database_connections",
+    "metric_value": 1980.0,
+    "unit": "connections"
+  },
+  {
+    "id": "EVD-009",
+    "incident_id": "INC-003",
+    "source_type": "LOG",
+    "description": "Postgres FATAL: remaining connection slots are reserved for non-replication superuser connections",
+    "timestamp": "2026-10-16T08:45:00+00:00",
+    "metric_name": null,
+    "metric_value": null,
+    "unit": null
+  },
+  {
+    "id": "EVD-010",
+    "incident_id": "INC-004",
+    "source_type": "METRIC",
+    "description": "API Gateway 504 Gateway Timeout rate climbed from 0.01% to 14.8%.",
+    "timestamp": "2026-10-16T09:45:00+00:00",
+    "metric_name": "http_504_rate_percent",
+    "metric_value": 14.8,
+    "unit": "percent"
+  },
+  {
+    "id": "EVD-011",
+    "incident_id": "INC-004",
+    "source_type": "LOG",
+    "description": "Envoy upstream timeout (15000ms exceeded) calling backend checkout.internal.cluster:8080/v2/checkout/submit",
+    "timestamp": "2026-10-16T09:50:00+00:00",
+    "metric_name": null,
+    "metric_value": null,
+    "unit": null
+  },
+  {
+    "id": "EVD-012",
+    "incident_id": "INC-005",
+    "source_type": "METRIC",
+    "description": "Kafka consumer group 'order-processor' total lag reached 152,400 messages across 12 partitions.",
+    "timestamp": "2026-10-16T08:00:00+00:00",
+    "metric_name": "kafka_consumer_lag",
+    "metric_value": 152400.0,
+    "unit": "messages"
+  },
+  {
+    "id": "EVD-013",
+    "incident_id": "INC-005",
+    "source_type": "ALERT",
+    "description": "Prometheus Alert: KafkaConsumerLagHigh on topic order.created > 50000 for 15m",
+    "timestamp": "2026-10-16T08:10:00+00:00",
+    "metric_name": "kafka_consumer_lag",
+    "metric_value": 152400.0,
+    "unit": "messages"
+  },
+  {
+    "id": "EVD-014",
+    "incident_id": "INC-006",
+    "source_type": "OBSERVATION",
+    "description": "Kubernetes kubelet killed notification-worker-67b8fd9-9xkm with exit code 137 (OOMKilled).",
+    "timestamp": "2026-10-16T05:45:00+00:00",
+    "metric_name": "container_memory_usage_bytes",
+    "metric_value": 2147483648.0,
+    "unit": "bytes"
+  },
+  {
+    "id": "EVD-015",
+    "incident_id": "INC-006",
+    "source_type": "METRIC",
+    "description": "Notification worker pod memory utilization stayed at 99.8% of 2Gi limit for 18 minutes.",
+    "timestamp": "2026-10-16T05:50:00+00:00",
+    "metric_name": "memory_utilization_percent",
+    "metric_value": 99.8,
+    "unit": "percent"
+  },
+  {
+    "id": "EVD-016",
+    "incident_id": "INC-007",
+    "source_type": "LOG",
+    "description": "java.lang.NullPointerException: Cannot invoke 'RiskProfile.getDeviceFingerprint()' because 'profile' is null at FraudScorerV2.evaluate(FraudScorerV2.java:184)",
+    "timestamp": "2026-10-15T23:50:00+00:00",
+    "metric_name": null,
+    "metric_value": null,
+    "unit": null
+  },
+  {
+    "id": "EVD-017",
+    "incident_id": "INC-007",
+    "source_type": "METRIC",
+    "description": "Canary deployment pod fraud-engine-canary-74d error rate 100% on guest transactions.",
+    "timestamp": "2026-10-15T23:55:00+00:00",
+    "metric_name": "canary_error_rate",
+    "metric_value": 100.0,
+    "unit": "percent"
+  },
+  {
+    "id": "EVD-018",
+    "incident_id": "INC-008",
+    "source_type": "ALERT",
+    "description": "External synthetic probe: DNS resolution failed for api.stripe.com in us-east-1 region (SERVFAIL)",
+    "timestamp": "2026-10-15T17:40:00+00:00",
+    "metric_name": "dns_lookup_failures",
+    "metric_value": 38.0,
+    "unit": "count"
+  },
+  {
+    "id": "EVD-019",
+    "incident_id": "INC-009",
+    "source_type": "METRIC",
+    "description": "Checkout service active HTTP worker threads reached 200/200 maximum capacity.",
+    "timestamp": "2026-10-16T10:40:00+00:00",
+    "metric_name": "tomcat_active_threads",
+    "metric_value": 200.0,
+    "unit": "threads"
+  },
+  {
+    "id": "EVD-020",
+    "incident_id": "INC-009",
+    "source_type": "TRACE",
+    "description": "Thread dump indicates 184 threads blocked waiting for socketRead0 from Payment Processing API endpoint /v1/charges",
+    "timestamp": "2026-10-16T10:45:00+00:00",
+    "metric_name": "blocked_threads_count",
+    "metric_value": 184.0,
+    "unit": "threads"
+  },
+  {
+    "id": "EVD-021",
+    "incident_id": "INC-010",
+    "source_type": "METRIC",
+    "description": "Container root filesystem disk usage reached 100% (20GB / 20GB) on billing-worker-0.",
+    "timestamp": "2026-10-16T06:45:00+00:00",
+    "metric_name": "disk_used_percent",
+    "metric_value": 100.0,
+    "unit": "percent"
+  },
+  {
+    "id": "EVD-022",
+    "incident_id": "INC-011",
+    "source_type": "LOG",
+    "description": "Postgres ERROR: deadlock detected between process 14092 and process 14115 waiting for ShareLock on transaction 89104",
+    "timestamp": "2026-10-15T11:45:00+00:00",
+    "metric_name": "deadlock_count",
+    "metric_value": 14.0,
+    "unit": "count"
+  },
+  {
+    "id": "EVD-023",
+    "incident_id": "INC-012",
+    "source_type": "METRIC",
+    "description": "JVM GC Old Generation collection duration spiked to 8,400ms on es-data-03 node.",
+    "timestamp": "2026-10-15T00:00:00+00:00",
+    "metric_name": "jvm_gc_collection_time_ms",
+    "metric_value": 8400.0,
+    "unit": "ms"
+  },
+  {
+    "id": "EVD-024",
+    "incident_id": "INC-013",
+    "source_type": "METRIC",
+    "description": "PostgreSQL pg_stat_replication replay_lag spiked to 452 seconds.",
+    "timestamp": "2026-10-14T12:00:00+00:00",
+    "metric_name": "replication_lag_seconds",
+    "metric_value": 452.0,
+    "unit": "seconds"
+  },
+  {
+    "id": "EVD-025",
+    "incident_id": "INC-014",
+    "source_type": "LOG",
+    "description": "CarrierGatewayClient: HTTP 429 Too Many Requests returned from FedEx API endpoint /rate/v1/rates",
+    "timestamp": "2026-10-14T07:50:00+00:00",
+    "metric_name": "http_429_count",
+    "metric_value": 240.0,
+    "unit": "count"
+  },
+  {
+    "id": "EVD-026",
+    "incident_id": "INC-015",
+    "source_type": "METRIC",
+    "description": "CPU utilization hit 100% on all 6 discount engine replicas during evaluation of promo code pattern '^(A+)+B$'.",
+    "timestamp": "2026-10-13T23:45:00+00:00",
+    "metric_name": "cpu_utilization_percent",
+    "metric_value": 100.0,
+    "unit": "percent"
+  },
+  {
+    "id": "EVD-027",
+    "incident_id": "INC-017",
+    "source_type": "LOG",
+    "description": "Duplicate payment idempotency key 'evt_charge_88192' processed twice within 120ms due to cache timeout.",
+    "timestamp": "2026-10-13T03:45:00+00:00",
+    "metric_name": "duplicate_charges_count",
+    "metric_value": 14.0,
+    "unit": "count"
+  },
+  {
+    "id": "EVD-028",
+    "incident_id": "INC-018",
+    "source_type": "METRIC",
+    "description": "Redis evicted_keys rate surged to 45,000 keys/sec during session load spike.",
+    "timestamp": "2026-10-12T11:50:00+00:00",
+    "metric_name": "evicted_keys_per_sec",
+    "metric_value": 45000.0,
+    "unit": "keys/sec"
+  },
+  {
+    "id": "EVD-029",
+    "incident_id": "INC-019",
+    "source_type": "ALERT",
+    "description": "DiskSpaceAlert: Kafka Broker 2 volume /var/lib/kafka/data reached 92.4% capacity (1.84TB / 2.0TB).",
+    "timestamp": "2026-10-16T02:00:00+00:00",
+    "metric_name": "disk_used_percent",
+    "metric_value": 92.4,
+    "unit": "percent"
+  },
+  {
+    "id": "EVD-030",
+    "incident_id": "INC-021",
+    "source_type": "LOG",
+    "description": "SSLHandshakeException: PKIX path validation failed: unable to find valid certification path to requested target",
+    "timestamp": "2026-10-11T01:45:00+00:00",
+    "metric_name": null,
+    "metric_value": null,
+    "unit": null
+  },
+  {
+    "id": "EVD-031",
+    "incident_id": "INC-022",
+    "source_type": "METRIC",
+    "description": "AWS ALB UnHealthyHostCount rose from 0 to 4 in checkout-service target group.",
+    "timestamp": "2026-10-16T04:45:00+00:00",
+    "metric_name": "unhealthy_host_count",
+    "metric_value": 4.0,
+    "unit": "hosts"
+  },
+  {
+    "id": "EVD-032",
+    "incident_id": "INC-001",
+    "source_type": "OBSERVATION",
+    "description": "Downstream checkout completion rate plummeted by 78% within 10 minutes of payment latency spike.",
+    "timestamp": "2026-10-16T10:42:00+00:00",
+    "metric_name": "checkout_success_rate",
+    "metric_value": 22.0,
+    "unit": "percent"
+  },
+  {
+    "id": "EVD-033",
+    "incident_id": "INC-002",
+    "source_type": "LOG",
+    "description": "Auth service connection timeout after 5000ms attempting to acquire Redis socket from pool.",
+    "timestamp": "2026-10-16T09:42:00+00:00",
+    "metric_name": "socket_timeout_ms",
+    "metric_value": 5000.0,
+    "unit": "ms"
+  },
+  {
+    "id": "EVD-034",
+    "incident_id": "INC-003",
+    "source_type": "OBSERVATION",
+    "description": "pg_stat_activity shows 1,850 connections in 'idle in transaction' state originating from billing webhook worker pods.",
+    "timestamp": "2026-10-16T08:50:00+00:00",
+    "metric_name": "idle_in_transaction_connections",
+    "metric_value": 1850.0,
+    "unit": "connections"
+  },
+  {
+    "id": "EVD-035",
+    "incident_id": "INC-005",
+    "source_type": "LOG",
+    "description": "org.apache.kafka.clients.consumer.CommitFailedException: Commit cannot be completed since the group has rebalanced.",
+    "timestamp": "2026-10-16T08:15:00+00:00",
+    "metric_name": null,
+    "metric_value": null,
+    "unit": null
+  },
+  {
+    "id": "EVD-036",
+    "incident_id": "INC-009",
+    "source_type": "ALERT",
+    "description": "Checkout Orchestrator request queue backlog breached 1,500 waiting requests.",
+    "timestamp": "2026-10-16T10:55:00+00:00",
+    "metric_name": "pending_request_queue",
+    "metric_value": 1500.0,
+    "unit": "requests"
+  },
+  {
+    "id": "EVD-037",
+    "incident_id": "INC-022",
+    "source_type": "LOG",
+    "description": "Target group health probe timed out after 5000ms on http://10.0.12.44:8080/health/ready",
+    "timestamp": "2026-10-16T04:50:00+00:00",
+    "metric_name": null,
+    "metric_value": null,
+    "unit": null
+  },
+  {
+    "id": "EVD-038",
+    "incident_id": "INC-024",
+    "source_type": "METRIC",
+    "description": "Postgres lock wait time on table orders peaked at 240,000ms during ALTER TABLE statement.",
+    "timestamp": "2026-10-09T11:40:00+00:00",
+    "metric_name": "lock_wait_time_ms",
+    "metric_value": 240000.0,
+    "unit": "ms"
+  },
+  {
+    "id": "EVD-039",
+    "incident_id": "INC-027",
+    "source_type": "METRIC",
+    "description": "SMS provider dispatch queue average delivery latency rose to 18,200ms.",
+    "timestamp": "2026-10-16T03:50:00+00:00",
+    "metric_name": "sms_dispatch_latency_ms",
+    "metric_value": 18200.0,
+    "unit": "ms"
+  },
+  {
+    "id": "EVD-040",
+    "incident_id": "INC-029",
+    "source_type": "ALERT",
+    "description": "EKS NodeStatus: 4 worker nodes transitioned to NotReady state due to kubelet heartbeat timeout.",
+    "timestamp": "2026-10-06T11:45:00+00:00",
+    "metric_name": "unready_nodes_count",
+    "metric_value": 4.0,
+    "unit": "nodes"
+  },
+  {
+    "id": "EVD-041",
+    "incident_id": "INC-030",
+    "source_type": "METRIC",
+    "description": "AWS CloudHSM crypto operation latency rose from 18ms baseline to 465ms p95.",
+    "timestamp": "2026-10-05T16:00:00+00:00",
+    "metric_name": "hsm_operation_duration_ms",
+    "metric_value": 465.0,
+    "unit": "ms"
+  },
+  {
+    "id": "EVD-042",
+    "incident_id": "INC-032",
+    "source_type": "LOG",
+    "description": "JWT signature verification failed for algorithm HS256: SignatureVerificationException on baseline pods.",
+    "timestamp": "2026-10-03T23:45:00+00:00",
+    "metric_name": null,
+    "metric_value": null,
+    "unit": null
+  },
+  {
+    "id": "EVD-043",
+    "incident_id": "INC-033",
+    "source_type": "OBSERVATION",
+    "description": "1,420 orders submitted with item prices discounted by 100% due to cached promotional edge response.",
+    "timestamp": "2026-10-03T04:00:00+00:00",
+    "metric_name": "anomalous_zero_dollar_orders",
+    "metric_value": 1420.0,
+    "unit": "orders"
+  },
+  {
+    "id": "EVD-044",
+    "incident_id": "INC-034",
+    "source_type": "METRIC",
+    "description": "Chrony NTP daemon offset measured at +3604.2 seconds on batch scheduler node.",
+    "timestamp": "2026-10-02T07:40:00+00:00",
+    "metric_name": "ntp_clock_offset_seconds",
+    "metric_value": 3604.2,
+    "unit": "seconds"
+  },
+  {
+    "id": "EVD-045",
+    "incident_id": "INC-035",
+    "source_type": "METRIC",
+    "description": "Fraud block rate jumped from normal 1.8% to 41.2% following new BIN range ingestion.",
+    "timestamp": "2026-10-01T11:50:00+00:00",
+    "metric_name": "fraud_block_rate_percent",
+    "metric_value": 41.2,
+    "unit": "percent"
+  },
+  {
+    "id": "EVD-046",
+    "incident_id": "INC-040",
+    "source_type": "METRIC",
+    "description": "3D Secure authentication drop-off rate reached 64% on mobile Safari checkouts.",
+    "timestamp": "2026-10-16T02:45:00+00:00",
+    "metric_name": "three_ds_dropoff_percent",
+    "metric_value": 64.0,
+    "unit": "percent"
+  },
+  {
+    "id": "EVD-047",
+    "incident_id": "INC-041",
+    "source_type": "LOG",
+    "description": "Puppeteer browser launcher error: ProtocolError (Target.createTarget): Target closed or Chromium crashed.",
+    "timestamp": "2026-10-16T00:50:00+00:00",
+    "metric_name": null,
+    "metric_value": null,
+    "unit": null
+  },
+  {
+    "id": "EVD-048",
+    "incident_id": "INC-042",
+    "source_type": "METRIC",
+    "description": "Global edge rate limiter blocked 99.4% of all public HTTP traffic across all customer IP addresses.",
+    "timestamp": "2026-09-25T15:40:00+00:00",
+    "metric_name": "rate_limit_drop_rate_percent",
+    "metric_value": 99.4,
+    "unit": "percent"
+  },
+  {
+    "id": "EVD-049",
+    "incident_id": "INC-001",
+    "source_type": "LOG",
+    "description": "Payment authorization gateway socket write timeout after 10000ms calling external credit card network.",
+    "timestamp": "2026-10-16T10:48:00+00:00",
+    "metric_name": "gateway_timeout_ms",
+    "metric_value": 10000.0,
+    "unit": "ms"
+  },
+  {
+    "id": "EVD-050",
+    "incident_id": "INC-002",
+    "source_type": "METRIC",
+    "description": "Redis memory usage steady at 4.2GB / 16GB, confirming connection leak rather than memory saturation.",
+    "timestamp": "2026-10-16T10:00:00+00:00",
+    "metric_name": "redis_memory_used_gb",
+    "metric_value": 4.2,
+    "unit": "GB"
+  },
+  {
+    "id": "EVD-051",
+    "incident_id": "INC-004",
+    "source_type": "ALERT",
+    "description": "AWS ALB 5XX error count surged past 4,500 errors per minute on public ingress.",
+    "timestamp": "2026-10-16T09:55:00+00:00",
+    "metric_name": "alb_http_5xx_rate",
+    "metric_value": 4500.0,
+    "unit": "errors/min"
+  },
+  {
+    "id": "EVD-052",
+    "incident_id": "INC-005",
+    "source_type": "METRIC",
+    "description": "Order processor pod CPU throttled by cgroups for 48% of total CPU cycles.",
+    "timestamp": "2026-10-16T08:25:00+00:00",
+    "metric_name": "cgroup_cpu_throttled_percent",
+    "metric_value": 48.0,
+    "unit": "percent"
+  },
+  {
+    "id": "EVD-053",
+    "incident_id": "INC-009",
+    "source_type": "LOG",
+    "description": "Checkout service circuit breaker to Payment API OPENED after 50 consecutive failed calls.",
+    "timestamp": "2026-10-16T11:00:00+00:00",
+    "metric_name": "consecutive_failures",
+    "metric_value": 50.0,
+    "unit": "failures"
+  },
+  {
+    "id": "EVD-054",
+    "incident_id": "INC-011",
+    "source_type": "METRIC",
+    "description": "Inventory reservation checkout rollback count spiked to 340 rollbacks per minute.",
+    "timestamp": "2026-10-15T12:00:00+00:00",
+    "metric_name": "rollback_rate",
+    "metric_value": 340.0,
+    "unit": "rollbacks/min"
+  },
+  {
+    "id": "EVD-055",
+    "incident_id": "INC-012",
+    "source_type": "LOG",
+    "description": "org.elasticsearch.transport.RemoteTransportException: [es-data-03][10.0.8.12:9300][indices:data/read/search[phase/query]]",
+    "timestamp": "2026-10-15T00:15:00+00:00",
+    "metric_name": null,
+    "metric_value": null,
+    "unit": null
+  },
+  {
+    "id": "EVD-056",
+    "incident_id": "INC-015",
+    "source_type": "LOG",
+    "description": "Regex evaluator timeout aborted thread after 10000ms executing coupon rule validator.",
+    "timestamp": "2026-10-14T00:00:00+00:00",
+    "metric_name": "regex_eval_duration_ms",
+    "metric_value": 10000.0,
+    "unit": "ms"
+  },
+  {
+    "id": "EVD-057",
+    "incident_id": "INC-017",
+    "source_type": "ALERT",
+    "description": "FinOps Audit Alert: Detected 14 duplicate transaction tokens in daily settlement ledger.",
+    "timestamp": "2026-10-13T04:15:00+00:00",
+    "metric_name": "ledger_discrepancy_count",
+    "metric_value": 14.0,
+    "unit": "items"
+  },
+  {
+    "id": "EVD-058",
+    "incident_id": "INC-018",
+    "source_type": "LOG",
+    "description": "SessionManager: JWT token session_id_99a8b could not be resolved from Redis cache cluster.",
+    "timestamp": "2026-10-12T12:10:00+00:00",
+    "metric_name": null,
+    "metric_value": null,
+    "unit": null
+  },
+  {
+    "id": "EVD-059",
+    "incident_id": "INC-021",
+    "source_type": "METRIC",
+    "description": "Payment service outbound HTTPS connection failure rate spiked to 100% on Visa Direct routes.",
+    "timestamp": "2026-10-11T02:00:00+00:00",
+    "metric_name": "outbound_https_failure_rate",
+    "metric_value": 100.0,
+    "unit": "percent"
+  },
+  {
+    "id": "EVD-060",
+    "incident_id": "INC-024",
+    "source_type": "LOG",
+    "description": "Liquibase migration script db/changelog-v3.18.xml failed with StatementTimeoutException after 300s.",
+    "timestamp": "2026-10-09T12:00:00+00:00",
+    "metric_name": null,
+    "metric_value": null,
+    "unit": null
+  },
+  {
+    "id": "EVD-061",
+    "incident_id": "INC-028",
+    "source_type": "LOG",
+    "description": "InventorySyncJob: UnicodeDecodeError 'utf-8' codec cannot decode byte 0x8a in position 45102: invalid start byte",
+    "timestamp": "2026-10-07T17:45:00+00:00",
+    "metric_name": null,
+    "metric_value": null,
+    "unit": null
+  },
+  {
+    "id": "EVD-062",
+    "incident_id": "INC-033",
+    "source_type": "ALERT",
+    "description": "Price Anomaly Detector: SKU-APPLE-IPHONE-16 listed at $0.00 in US-WEST edge cache region.",
+    "timestamp": "2026-10-03T04:15:00+00:00",
+    "metric_name": "anomalous_price",
+    "metric_value": 0.0,
+    "unit": "USD"
+  },
+  {
+    "id": "EVD-063",
+    "incident_id": "INC-042",
+    "source_type": "LOG",
+    "description": "WAF rate limit rule 'Global-Protection-R1' matched client IP 10.0.0.1 (ALB private IP) exceeding 100 req/min limit.",
+    "timestamp": "2026-09-25T16:00:00+00:00",
+    "metric_name": "throttled_requests_per_sec",
+    "metric_value": 8500.0,
+    "unit": "req/sec"
+  },
+  {
+    "id": "EVD-064",
+    "incident_id": "INC-003",
+    "source_type": "METRIC",
+    "description": "Billing webhook endpoint /v1/webhooks/billing unclosed connections accumulation rate: +45 conn/min.",
+    "timestamp": "2026-10-16T09:00:00+00:00",
+    "metric_name": "connection_leak_rate",
+    "metric_value": 45.0,
+    "unit": "conn/min"
+  },
+  {
+    "id": "EVD-065",
+    "incident_id": "INC-001",
+    "source_type": "METRIC",
+    "description": "Payment authorization queue depth in Payment Service spiked from 2 to 840 pending requests.",
+    "timestamp": "2026-10-16T10:52:00+00:00",
+    "metric_name": "internal_queue_depth",
+    "metric_value": 840.0,
+    "unit": "requests"
+  },
+  {
+    "id": "EVD-066",
+    "incident_id": "INC-002",
+    "source_type": "METRIC",
+    "description": "Auth Service pod connection pool wait time average jumped from 1.2ms to 4,800ms.",
+    "timestamp": "2026-10-16T10:05:00+00:00",
+    "metric_name": "pool_wait_duration_ms",
+    "metric_value": 4800.0,
+    "unit": "ms"
+  },
+  {
+    "id": "EVD-067",
+    "incident_id": "INC-005",
+    "source_type": "METRIC",
+    "description": "Order processor Kafka batch processing duration rose to 45 seconds per batch.",
+    "timestamp": "2026-10-16T08:30:00+00:00",
+    "metric_name": "batch_processing_duration_seconds",
+    "metric_value": 45.0,
+    "unit": "seconds"
+  },
+  {
+    "id": "EVD-068",
+    "incident_id": "INC-010",
+    "source_type": "LOG",
+    "description": "Billing container disk alert: /tmp/gs_ghostscript_temp_8849.tmp reached 14GB without deletion.",
+    "timestamp": "2026-10-16T07:00:00+00:00",
+    "metric_name": "temp_file_size_gb",
+    "metric_value": 14.0,
+    "unit": "GB"
+  }
+]

@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  # FalkorDB Graph Database
+  # Note: If you already have a running FalkorDB container on port 6379,
+  # the backend will connect directly to it.
+  falkordb:
+    image: falkordb/falkordb:latest
+    container_name: graphsentinel-falkordb
+    ports:
+      - "6379:6379"
+      - "3000:3000"
+    volumes:
+      - falkordb_data:/var/lib/falkordb/data
+    restart: unless-stopped
+
+volumes:
+  falkordb_data:
+    name: graphsentinel_falkordb_data

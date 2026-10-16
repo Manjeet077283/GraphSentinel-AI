@@ -1,0 +1,58 @@
+[
+  {
+    "id": "INF-RDS-PAYMENT",
+    "name": "Payment Aurora PostgreSQL Primary",
+    "type": "DATABASE",
+    "environment": "PRODUCTION",
+    "status": "DEGRADED"
+  },
+  {
+    "id": "INF-RDS-REPLICA",
+    "name": "Payment Aurora Read Replica",
+    "type": "DATABASE",
+    "environment": "PRODUCTION",
+    "status": "HEALTHY"
+  },
+  {
+    "id": "INF-REDIS-CLUSTER",
+    "name": "Session & Token Redis Cluster",
+    "type": "CACHE",
+    "environment": "PRODUCTION",
+    "status": "CRITICAL"
+  },
+  {
+    "id": "INF-KAFKA-BROKER",
+    "name": "Order Events Kafka Broker Cluster",
+    "type": "MESSAGE_BROKER",
+    "environment": "PRODUCTION",
+    "status": "DEGRADED"
+  },
+  {
+    "id": "INF-RABBITMQ",
+    "name": "Notification RabbitMQ Cluster",
+    "type": "MESSAGE_BROKER",
+    "environment": "PRODUCTION",
+    "status": "HEALTHY"
+  },
+  {
+    "id": "INF-EKS-PROD",
+    "name": "AWS EKS Cluster us-east-1",
+    "type": "CONTAINER_PLATFORM",
+    "environment": "PRODUCTION",
+    "status": "HEALTHY"
+  },
+  {
+    "id": "INF-ALB-PUBLIC",
+    "name": "Production Internet ALB",
+    "type": "LOAD_BALANCER",
+    "environment": "PRODUCTION",
+    "status": "DEGRADED"
+  },
+  {
+    "id": "INF-CLOUDFLARE",
+    "name": "Cloudflare Edge DNS & WAF",
+    "type": "CDN_DNS",
+    "environment": "PRODUCTION",
+    "status": "HEALTHY"
+  }
+]

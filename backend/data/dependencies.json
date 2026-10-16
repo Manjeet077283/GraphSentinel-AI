@@ -1,0 +1,246 @@
+{
+  "service_dependencies": [
+    {
+      "source": "SVC-API-GW",
+      "target": "SVC-AUTH",
+      "relationship": "DEPENDS_ON"
+    },
+    {
+      "source": "SVC-API-GW",
+      "target": "SVC-CHECKOUT",
+      "relationship": "DEPENDS_ON"
+    },
+    {
+      "source": "SVC-API-GW",
+      "target": "SVC-CATALOG",
+      "relationship": "DEPENDS_ON"
+    },
+    {
+      "source": "SVC-API-GW",
+      "target": "SVC-SEARCH",
+      "relationship": "DEPENDS_ON"
+    },
+    {
+      "source": "SVC-API-GW",
+      "target": "SVC-USER",
+      "relationship": "DEPENDS_ON"
+    },
+    {
+      "source": "SVC-API-GW",
+      "target": "SVC-ORDER",
+      "relationship": "DEPENDS_ON"
+    },
+    {
+      "source": "SVC-API-GW",
+      "target": "SVC-REVIEWS",
+      "relationship": "DEPENDS_ON"
+    },
+    {
+      "source": "SVC-CHECKOUT",
+      "target": "SVC-AUTH",
+      "relationship": "DEPENDS_ON"
+    },
+    {
+      "source": "SVC-CHECKOUT",
+      "target": "SVC-PAYMENT",
+      "relationship": "DEPENDS_ON"
+    },
+    {
+      "source": "SVC-CHECKOUT",
+      "target": "SVC-ORDER",
+      "relationship": "DEPENDS_ON"
+    },
+    {
+      "source": "SVC-CHECKOUT",
+      "target": "SVC-INVENTORY",
+      "relationship": "DEPENDS_ON"
+    },
+    {
+      "source": "SVC-CHECKOUT",
+      "target": "SVC-DISCOUNTS",
+      "relationship": "DEPENDS_ON"
+    },
+    {
+      "source": "SVC-CHECKOUT",
+      "target": "SVC-USER",
+      "relationship": "DEPENDS_ON"
+    },
+    {
+      "source": "SVC-PAYMENT",
+      "target": "SVC-AUTH",
+      "relationship": "DEPENDS_ON"
+    },
+    {
+      "source": "SVC-PAYMENT",
+      "target": "SVC-FRAUD",
+      "relationship": "DEPENDS_ON"
+    },
+    {
+      "source": "SVC-PAYMENT",
+      "target": "SVC-BILLING",
+      "relationship": "DEPENDS_ON"
+    },
+    {
+      "source": "SVC-ORDER",
+      "target": "SVC-PAYMENT",
+      "relationship": "DEPENDS_ON"
+    },
+    {
+      "source": "SVC-ORDER",
+      "target": "SVC-INVENTORY",
+      "relationship": "DEPENDS_ON"
+    },
+    {
+      "source": "SVC-ORDER",
+      "target": "SVC-SHIPPING",
+      "relationship": "DEPENDS_ON"
+    },
+    {
+      "source": "SVC-ORDER",
+      "target": "SVC-NOTIF",
+      "relationship": "DEPENDS_ON"
+    },
+    {
+      "source": "SVC-BILLING",
+      "target": "SVC-NOTIF",
+      "relationship": "DEPENDS_ON"
+    },
+    {
+      "source": "SVC-BILLING",
+      "target": "SVC-USER",
+      "relationship": "DEPENDS_ON"
+    },
+    {
+      "source": "SVC-CATALOG",
+      "target": "SVC-INVENTORY",
+      "relationship": "DEPENDS_ON"
+    },
+    {
+      "source": "SVC-SEARCH",
+      "target": "SVC-CATALOG",
+      "relationship": "DEPENDS_ON"
+    },
+    {
+      "source": "SVC-REVIEWS",
+      "target": "SVC-CATALOG",
+      "relationship": "DEPENDS_ON"
+    },
+    {
+      "source": "SVC-REVIEWS",
+      "target": "SVC-USER",
+      "relationship": "DEPENDS_ON"
+    },
+    {
+      "source": "SVC-FRAUD",
+      "target": "SVC-USER",
+      "relationship": "DEPENDS_ON"
+    },
+    {
+      "source": "SVC-FRAUD",
+      "target": "SVC-ORDER",
+      "relationship": "DEPENDS_ON"
+    },
+    {
+      "source": "SVC-SHIPPING",
+      "target": "SVC-USER",
+      "relationship": "DEPENDS_ON"
+    },
+    {
+      "source": "SVC-CHECKOUT",
+      "target": "SVC-ANALYTICS",
+      "relationship": "DEPENDS_ON"
+    },
+    {
+      "source": "SVC-PAYMENT",
+      "target": "SVC-ANALYTICS",
+      "relationship": "DEPENDS_ON"
+    },
+    {
+      "source": "SVC-ORDER",
+      "target": "SVC-ANALYTICS",
+      "relationship": "DEPENDS_ON"
+    }
+  ],
+  "infrastructure_connections": [
+    {
+      "source": "SVC-API-GW",
+      "target": "INF-ALB-PUBLIC",
+      "relationship": "CONNECTS_TO"
+    },
+    {
+      "source": "SVC-API-GW",
+      "target": "INF-CLOUDFLARE",
+      "relationship": "CONNECTS_TO"
+    },
+    {
+      "source": "SVC-AUTH",
+      "target": "INF-REDIS-CLUSTER",
+      "relationship": "CONNECTS_TO"
+    },
+    {
+      "source": "SVC-AUTH",
+      "target": "INF-RDS-PAYMENT",
+      "relationship": "CONNECTS_TO"
+    },
+    {
+      "source": "SVC-PAYMENT",
+      "target": "INF-RDS-PAYMENT",
+      "relationship": "CONNECTS_TO"
+    },
+    {
+      "source": "SVC-PAYMENT",
+      "target": "INF-RDS-REPLICA",
+      "relationship": "CONNECTS_TO"
+    },
+    {
+      "source": "SVC-PAYMENT",
+      "target": "INF-REDIS-CLUSTER",
+      "relationship": "CONNECTS_TO"
+    },
+    {
+      "source": "SVC-ORDER",
+      "target": "INF-KAFKA-BROKER",
+      "relationship": "CONNECTS_TO"
+    },
+    {
+      "source": "SVC-ORDER",
+      "target": "INF-RDS-PAYMENT",
+      "relationship": "CONNECTS_TO"
+    },
+    {
+      "source": "SVC-BILLING",
+      "target": "INF-RDS-PAYMENT",
+      "relationship": "CONNECTS_TO"
+    },
+    {
+      "source": "SVC-NOTIF",
+      "target": "INF-RABBITMQ",
+      "relationship": "CONNECTS_TO"
+    },
+    {
+      "source": "SVC-USER",
+      "target": "INF-RDS-REPLICA",
+      "relationship": "CONNECTS_TO"
+    },
+    {
+      "source": "SVC-ANALYTICS",
+      "target": "INF-KAFKA-BROKER",
+      "relationship": "CONNECTS_TO"
+    },
+    {
+      "source": "SVC-CHECKOUT",
+      "target": "INF-EKS-PROD",
+      "relationship": "CONNECTS_TO"
+    },
+    {
+      "source": "SVC-PAYMENT",
+      "target": "INF-EKS-PROD",
+      "relationship": "CONNECTS_TO"
+    },
+    {
+      "source": "SVC-AUTH",
+      "target": "INF-EKS-PROD",
+      "relationship": "CONNECTS_TO"
+    }
+  ]
+}
