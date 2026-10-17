@@ -21,7 +21,7 @@ def trigger_seed(
     Protected database seeding endpoint.
     Requires X-Admin-Secret header matching configured ADMIN_SECRET.
     """
-    if x_admin_secret != settings.ADMIN_SECRET:
+    if not settings.ADMIN_SECRET or x_admin_secret != settings.ADMIN_SECRET:
         raise HTTPException(
             status_code=401,
             detail="Unauthorized: invalid or missing X-Admin-Secret header."

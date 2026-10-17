@@ -9,7 +9,10 @@ import {
   AlertTriangle,
   RefreshCw,
   Network,
-  BotMessageSquare
+  BotMessageSquare,
+  ShieldCheck,
+  Cpu,
+  Layers
 } from 'lucide-react';
 import { api } from '../services/api';
 import { ServiceSummary, ServiceDetail } from '../types';
@@ -43,7 +46,7 @@ export const ServicesPage: React.FC = () => {
         }
       })
       .catch((err) => {
-        setError(err.message);
+        setError(err.message || 'Failed to fetch services');
         setLoading(false);
       });
   };
@@ -71,55 +74,57 @@ export const ServicesPage: React.FC = () => {
   });
 
   return (
-    <div className="space-y-6 pb-12">
+    <div className="space-y-6 pb-12 max-w-7xl mx-auto">
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <Server className="w-5 h-5 text-cyan-400" />
-            <span className="text-xs font-mono font-medium text-cyan-400 uppercase tracking-wider">
-              Service Mesh & Catalog
+            <span className="w-2 h-2 rounded-full bg-indigo-600" />
+            <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+              Service Catalog & Mesh
             </span>
           </div>
-          <h1 className="text-2xl font-black text-white font-mono">Service Explorer</h1>
-          <p className="text-xs text-slate-400">
-            Browse service architectures, upstream dependents, downstream dependencies, and connected infrastructure.
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+            Service Explorer
+          </h1>
+          <p className="text-sm text-slate-600 mt-1">
+            Browse microservices, understand upstream callers, downstream dependencies, and connected infrastructure.
           </p>
         </div>
 
         <button
           onClick={fetchServices}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-xs text-slate-300 hover:text-white transition-colors font-mono self-start"
+          className="flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-white border border-slate-200 text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors shadow-2xs self-start"
         >
-          <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} />
-          Refresh
+          <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin text-indigo-600' : ''}`} />
+          <span>Refresh Services</span>
         </button>
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="p-4 rounded-xl bg-slate-900/90 border border-slate-800 space-y-3">
+      <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-4">
         <div className="relative">
-          <Search className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
+          <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-3" />
           <input
             type="text"
             placeholder="Search service by name, ID (e.g. 'SVC-PAYMENT'), or team..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full bg-slate-950 text-slate-200 text-xs rounded-lg pl-9 pr-3 py-2 border border-slate-800 focus:outline-none focus:border-cyan-500 font-mono"
+            className="w-full bg-slate-50/70 text-slate-800 text-sm rounded-xl pl-10 pr-4 py-2.5 border border-slate-200 focus:outline-none focus:border-indigo-500 focus:bg-white focus:ring-1 focus:ring-indigo-500 placeholder:text-slate-400 transition-colors"
           />
         </div>
 
-        <div className="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-slate-800/80 text-xs font-mono">
-          <div className="flex items-center gap-1 flex-wrap">
-            <span className="text-slate-400 mr-1.5">Health:</span>
+        <div className="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-slate-100 text-xs">
+          <div className="flex items-center gap-1.5 flex-wrap">
+            <span className="text-slate-500 font-medium mr-1">Health Status:</span>
             {['ALL', 'HEALTHY', 'DEGRADED', 'CRITICAL'].map((st) => (
               <button
                 key={st}
                 onClick={() => setStatusFilter(st)}
-                className={`px-2.5 py-1 rounded text-xs transition-colors ${
+                className={`px-3 py-1 rounded-lg text-xs font-medium transition-colors ${
                   statusFilter === st
-                    ? 'bg-cyan-950 text-cyan-300 border border-cyan-800 font-semibold'
-                    : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800'
+                    ? 'bg-indigo-50 text-indigo-700 border border-indigo-200 font-semibold'
+                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100 border border-transparent'
                 }`}
               >
                 {st}
@@ -127,16 +132,16 @@ export const ServicesPage: React.FC = () => {
             ))}
           </div>
 
-          <div className="flex items-center gap-1 flex-wrap">
-            <span className="text-slate-400 mr-1.5">Criticality:</span>
+          <div className="flex items-center gap-1.5 flex-wrap">
+            <span className="text-slate-500 font-medium mr-1">Criticality:</span>
             {['ALL', 'TIER_1', 'TIER_2', 'TIER_3', 'TIER_4'].map((crit) => (
               <button
                 key={crit}
                 onClick={() => setCriticalityFilter(crit)}
-                className={`px-2.5 py-1 rounded text-xs transition-colors ${
+                className={`px-3 py-1 rounded-lg text-xs font-medium transition-colors ${
                   criticalityFilter === crit
-                    ? 'bg-cyan-950 text-cyan-300 border border-cyan-800 font-semibold'
-                    : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800'
+                    ? 'bg-indigo-50 text-indigo-700 border border-indigo-200 font-semibold'
+                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100 border border-transparent'
                 }`}
               >
                 {crit}
@@ -149,29 +154,35 @@ export const ServicesPage: React.FC = () => {
       {/* Main 2-Column Layout: Service List + Service Inspector */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Service List (5 cols) */}
-        <div className="lg:col-span-5 space-y-2.5 max-h-[720px] overflow-y-auto pr-1">
+        <div className="lg:col-span-5 space-y-2.5 max-h-[750px] overflow-y-auto pr-1">
           {loading ? (
-            <div className="p-8 text-center font-mono text-xs text-slate-400">Loading services...</div>
+            <div className="p-8 text-center text-xs text-slate-500 bg-white rounded-2xl border border-slate-200">
+              Loading services from FalkorDB...
+            </div>
           ) : filteredServices.length === 0 ? (
-            <div className="p-8 text-center font-mono text-xs text-slate-400">No services found.</div>
+            <div className="p-8 text-center text-xs text-slate-500 bg-white rounded-2xl border border-slate-200">
+              No services matched the filter criteria.
+            </div>
           ) : (
             filteredServices.map((svc) => (
               <div
                 key={svc.id}
                 onClick={() => loadServiceDetail(svc.id)}
-                className={`p-3.5 rounded-xl border cursor-pointer transition-all ${
+                className={`p-4 rounded-xl border cursor-pointer transition-all ${
                   selectedService?.id === svc.id
-                    ? 'bg-slate-850 border-cyan-500 shadow-md shadow-cyan-950/40'
-                    : 'bg-slate-900/80 border-slate-800 hover:border-slate-700'
+                    ? 'bg-indigo-50/70 border-indigo-400 shadow-xs'
+                    : 'bg-white border-slate-200 hover:border-slate-300'
                 }`}
               >
                 <div className="flex items-center justify-between">
-                  <span className="font-mono text-xs font-bold text-white">{svc.name}</span>
+                  <span className="text-sm font-bold text-slate-900">{svc.name}</span>
                   <HealthBadge status={svc.status} />
                 </div>
-                <div className="flex items-center justify-between text-[11px] font-mono text-slate-400 mt-1.5">
-                  <span className="text-cyan-400 font-semibold">{svc.id}</span>
-                  <span>{svc.criticality}</span>
+                <div className="flex items-center justify-between text-xs text-slate-500 mt-2">
+                  <span className="font-mono text-indigo-600 font-semibold">{svc.id}</span>
+                  <span className="bg-slate-100 px-2 py-0.5 rounded text-[11px] font-medium text-slate-600">
+                    {svc.criticality}
+                  </span>
                   <span>{svc.team}</span>
                 </div>
               </div>
@@ -182,38 +193,41 @@ export const ServicesPage: React.FC = () => {
         {/* Service Inspector (7 cols) */}
         <div className="lg:col-span-7">
           {loadingDetail ? (
-            <div className="p-12 rounded-xl bg-slate-900 border border-slate-800 flex flex-col items-center justify-center gap-3">
-              <RefreshCw className="w-6 h-6 text-cyan-400 animate-spin" />
-              <p className="text-xs font-mono text-slate-400">Loading architecture topology...</p>
+            <div className="p-12 rounded-2xl bg-white border border-slate-200 flex flex-col items-center justify-center gap-3">
+              <RefreshCw className="w-6 h-6 text-indigo-600 animate-spin" />
+              <p className="text-xs font-medium text-slate-500">Loading service architecture details...</p>
             </div>
           ) : selectedService ? (
-            <div className="p-6 rounded-2xl bg-slate-900 border border-slate-800 shadow-xl space-y-6">
+            <div className="p-6 sm:p-8 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-6">
               {/* Header */}
-              <div className="flex items-start justify-between">
+              <div className="flex items-start justify-between gap-4 pb-4 border-b border-slate-100">
                 <div>
-                  <div className="flex items-center gap-2">
-                    <span className="font-mono text-xs font-bold text-cyan-400 bg-cyan-950 px-2 py-0.5 rounded border border-cyan-800">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <span className="font-mono text-xs font-bold text-slate-800 bg-slate-100 px-2.5 py-0.5 rounded border border-slate-200">
                       {selectedService.id}
                     </span>
                     <HealthBadge status={selectedService.status} />
-                    <span className="font-mono text-xs text-slate-400">{selectedService.criticality}</span>
+                    <span className="text-xs font-semibold text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded border border-indigo-100">
+                      {selectedService.criticality}
+                    </span>
+                    <span className="text-xs text-slate-500 font-medium">Team: {selectedService.team}</span>
                   </div>
-                  <h2 className="text-xl font-bold text-white mt-1.5">{selectedService.name}</h2>
-                  <p className="text-xs text-slate-300 mt-1 leading-relaxed">{selectedService.description}</p>
+                  <h2 className="text-xl font-extrabold text-slate-900 mt-2">{selectedService.name}</h2>
+                  <p className="text-xs text-slate-600 mt-1 leading-relaxed">{selectedService.description}</p>
                 </div>
 
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 shrink-0">
                   <Link
                     to={`/graph?service=${selectedService.id}`}
                     title="View in Dependency Graph"
-                    className="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-cyan-400 border border-slate-700 transition-colors"
+                    className="p-2 rounded-lg bg-white hover:bg-slate-50 text-indigo-600 border border-slate-200 shadow-2xs transition-colors"
                   >
                     <Network className="w-4 h-4" />
                   </Link>
                   <Link
                     to={`/chat?service=${selectedService.id}`}
-                    title="Investigate with AI"
-                    className="p-2 rounded-lg bg-cyan-600 hover:bg-cyan-500 text-white transition-colors"
+                    title="Investigate Service with AI"
+                    className="p-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white transition-colors shadow-2xs"
                   >
                     <BotMessageSquare className="w-4 h-4" />
                   </Link>
@@ -222,15 +236,20 @@ export const ServicesPage: React.FC = () => {
 
               {/* Active Incidents on Service */}
               {selectedService.active_incidents.length > 0 && (
-                <div className="p-4 rounded-xl bg-rose-950/30 border border-rose-800/60 space-y-2">
-                  <div className="flex items-center gap-2 text-rose-400 text-xs font-mono font-bold">
+                <div className="p-4 rounded-xl bg-rose-50 border border-rose-200 space-y-2">
+                  <div className="flex items-center gap-2 text-rose-800 text-xs font-bold">
                     <AlertTriangle className="w-4 h-4" />
                     <span>Active Incident Affecting This Service</span>
                   </div>
                   {selectedService.active_incidents.map((a) => (
-                    <div key={a.id} className="flex items-center justify-between text-xs font-mono">
-                      <span className="text-slate-200">{a.id}: {a.title} ({a.severity})</span>
-                      <Link to={`/incidents/${a.id}`} className="text-cyan-400 hover:underline flex items-center gap-1">
+                    <div key={a.id} className="flex items-center justify-between text-xs">
+                      <span className="text-slate-800 font-medium">
+                        <strong>{a.id}</strong>: {a.title} ({a.severity.replace('P1_', '').replace('P2_', '')})
+                      </span>
+                      <Link
+                        to={`/incidents/${a.id}`}
+                        className="text-indigo-600 hover:text-indigo-800 font-semibold flex items-center gap-1"
+                      >
                         <span>Investigate</span>
                         <ArrowRight className="w-3 h-3" />
                       </Link>
@@ -241,18 +260,20 @@ export const ServicesPage: React.FC = () => {
 
               {/* Connected Infrastructure */}
               <div className="space-y-3">
-                <h4 className="text-xs font-bold text-white font-mono uppercase tracking-wider flex items-center gap-2">
-                  <Database className="w-3.5 h-3.5 text-indigo-400" />
+                <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wider flex items-center gap-2">
+                  <Database className="w-4 h-4 text-purple-600" />
                   <span>Connected Infrastructure ({selectedService.connected_infrastructure.length})</span>
                 </h4>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 font-mono text-xs">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
                   {selectedService.connected_infrastructure.map((inf) => (
-                    <div key={inf.id} className="p-2.5 rounded-lg bg-slate-950 border border-slate-850 flex items-center justify-between">
+                    <div key={inf.id} className="p-3 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between">
                       <div>
-                        <span className="text-slate-200 font-semibold block">{inf.name}</span>
-                        <span className="text-[10px] text-slate-400">{inf.type} • {inf.environment}</span>
+                        <span className="font-bold text-slate-900 block">{inf.name}</span>
+                        <span className="text-[11px] text-slate-500 font-mono">{inf.type} • {inf.environment}</span>
                       </div>
-                      <span className={`text-[10px] px-1.5 py-0.5 rounded font-bold ${inf.status === 'HEALTHY' ? 'text-emerald-400' : 'text-amber-400'}`}>
+                      <span className={`text-[10px] px-2 py-0.5 rounded font-bold ${
+                        inf.status === 'HEALTHY' ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : 'bg-amber-50 text-amber-800 border border-amber-200'
+                      }`}>
                         {inf.status}
                       </span>
                     </div>
@@ -261,19 +282,23 @@ export const ServicesPage: React.FC = () => {
               </div>
 
               {/* Downstream Dependencies */}
-              <div className="space-y-3 border-t border-slate-800 pt-4">
-                <h4 className="text-xs font-bold text-white font-mono uppercase tracking-wider">
-                  Downstream Dependencies ({selectedService.name} depends on):
+              <div className="space-y-3 border-t border-slate-100 pt-4">
+                <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wider flex items-center gap-2">
+                  <ArrowRight className="w-3.5 h-3.5 text-blue-600" />
+                  <span>Downstream Dependencies ({selectedService.name} calls / relies on):</span>
                 </h4>
                 {selectedService.downstream_dependencies.length === 0 ? (
-                  <p className="text-xs text-slate-400 font-mono italic">No downstream service dependencies.</p>
+                  <p className="text-xs text-slate-500 italic">No downstream service dependencies.</p>
                 ) : (
-                  <div className="space-y-2 font-mono text-xs">
+                  <div className="space-y-2 text-xs">
                     {selectedService.downstream_dependencies.map((d) => (
-                      <div key={d.id} className="p-2.5 rounded-lg bg-slate-950 border border-slate-850 flex items-center justify-between">
-                        <span className="text-slate-200">{d.name} ({d.id})</span>
+                      <div key={d.id} className="p-3 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between">
                         <div className="flex items-center gap-2">
-                          <span className="text-slate-400 text-[10px]">{d.criticality}</span>
+                          <span className="font-bold text-slate-900">{d.name}</span>
+                          <span className="font-mono text-[10px] text-slate-500">({d.id})</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className="text-slate-500 text-[11px] font-medium">{d.criticality}</span>
                           <HealthBadge status={d.status} />
                         </div>
                       </div>
@@ -283,19 +308,23 @@ export const ServicesPage: React.FC = () => {
               </div>
 
               {/* Upstream Dependents */}
-              <div className="space-y-3 border-t border-slate-800 pt-4">
-                <h4 className="text-xs font-bold text-white font-mono uppercase tracking-wider">
-                  Upstream Dependents (Services relying on {selectedService.name}):
+              <div className="space-y-3 border-t border-slate-100 pt-4">
+                <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wider flex items-center gap-2">
+                  <Layers className="w-3.5 h-3.5 text-indigo-600" />
+                  <span>Upstream Callers (Services that rely on {selectedService.name}):</span>
                 </h4>
                 {selectedService.upstream_dependencies.length === 0 ? (
-                  <p className="text-xs text-slate-400 font-mono italic">No upstream services depend on this service.</p>
+                  <p className="text-xs text-slate-500 italic">No upstream services depend on this service directly.</p>
                 ) : (
-                  <div className="space-y-2 font-mono text-xs">
+                  <div className="space-y-2 text-xs">
                     {selectedService.upstream_dependencies.map((u) => (
-                      <div key={u.id} className="p-2.5 rounded-lg bg-slate-950 border border-slate-850 flex items-center justify-between">
-                        <span className="text-slate-200">{u.name} ({u.id})</span>
+                      <div key={u.id} className="p-3 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between">
                         <div className="flex items-center gap-2">
-                          <span className="text-slate-400 text-[10px]">{u.criticality}</span>
+                          <span className="font-bold text-slate-900">{u.name}</span>
+                          <span className="font-mono text-[10px] text-slate-500">({u.id})</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className="text-slate-500 text-[11px] font-medium">{u.criticality}</span>
                           <HealthBadge status={u.status} />
                         </div>
                       </div>
@@ -305,8 +334,8 @@ export const ServicesPage: React.FC = () => {
               </div>
             </div>
           ) : (
-            <div className="p-12 rounded-xl bg-slate-900 border border-slate-800 text-center font-mono text-xs text-slate-400">
-              Select a service from the list to inspect its dependency architecture.
+            <div className="p-12 rounded-2xl bg-white border border-slate-200 text-center text-xs text-slate-500">
+              Select a service from the left list to inspect its dependency architecture.
             </div>
           )}
         </div>

@@ -35,11 +35,19 @@ yarn-debug.log*
 yarn-error.log*
 
 # Environment and Secrets
-.env
-.env.local
-.env.*.local
+.env*
+!.env.example
+!frontend/.env.example
 *.pem
 *.key
+*.db
+*.sqlite
+*.sqlite3
+backend/data/*.db
+
+# Logs
+*.log
+logs/
 
 # IDE & OS
 .vscode/

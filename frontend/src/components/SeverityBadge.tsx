@@ -6,33 +6,33 @@ interface SeverityBadgeProps {
 }
 
 export const SeverityBadge: React.FC<SeverityBadgeProps> = ({ severity, size = 'md' }) => {
-  const sizeClasses = size === 'sm' ? 'px-1.5 py-0.5 text-xs' : 'px-2.5 py-1 text-xs';
+  const sizeClasses = size === 'sm' ? 'px-2 py-0.5 text-xs' : 'px-2.5 py-1 text-xs';
 
-  let colorClasses = 'bg-slate-800 text-slate-300 border-slate-700';
+  let colorClasses = 'bg-slate-100 text-slate-700 border-slate-200';
   let label = severity;
 
   switch (severity) {
     case 'P1_CRITICAL':
-      colorClasses = 'bg-rose-950/80 text-rose-300 border-rose-800/80 shadow-sm shadow-rose-950/50';
+      colorClasses = 'bg-red-50 text-red-700 border-red-200 font-semibold';
       label = 'P1 Critical';
       break;
     case 'P2_HIGH':
-      colorClasses = 'bg-amber-950/80 text-amber-300 border-amber-800/80 shadow-sm shadow-amber-950/50';
+      colorClasses = 'bg-orange-50 text-orange-700 border-orange-200 font-semibold';
       label = 'P2 High';
       break;
     case 'P3_MEDIUM':
-      colorClasses = 'bg-yellow-950/70 text-yellow-300 border-yellow-800/70';
+      colorClasses = 'bg-amber-50 text-amber-800 border-amber-200';
       label = 'P3 Medium';
       break;
     case 'P4_LOW':
-      colorClasses = 'bg-blue-950/70 text-blue-300 border-blue-800/70';
+      colorClasses = 'bg-blue-50 text-blue-700 border-blue-200';
       label = 'P4 Low';
       break;
   }
 
   return (
-    <span className={`inline-flex items-center font-mono font-medium rounded-full border ${sizeClasses} ${colorClasses}`}>
-      <span className="w-1.5 h-1.5 rounded-full mr-1.5 bg-current animate-pulse" />
+    <span className={`inline-flex items-center font-sans font-medium rounded-full border ${sizeClasses} ${colorClasses}`}>
+      <span className="w-1.5 h-1.5 rounded-full mr-1.5 bg-current" />
       {label}
     </span>
   );

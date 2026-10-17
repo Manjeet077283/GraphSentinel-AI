@@ -1,9 +1,7 @@
 version: '3.8'
 
 services:
-  # FalkorDB Graph Database
-  # Note: If you already have a running FalkorDB container on port 6379,
-  # the backend will connect directly to it.
+  # FalkorDB Graph Database (for local containerized deployment)
   falkordb:
     image: falkordb/falkordb:latest
     container_name: graphsentinel-falkordb
@@ -14,6 +12,48 @@ services:
       - falkordb_data:/var/lib/falkordb/data
     restart: unless-stopped
 
+  # GraphSentinel AI FastAPI Backend
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: graphsentinel-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - ENVIRONMENT=production
+      - PORT=8000
+      - FALKORDB_HOST=${FALKORDB_HOST:-falkordb}
+      - FALKORDB_PORT=${FALKORDB_PORT:-6379}
+      - FALKORDB_GRAPH=${FALKORDB_GRAPH:-graphsentinel-ai}
+      - FALKORDB_USERNAME=${FALKORDB_USERNAME:-}
+      - FALKORDB_PASSWORD=${FALKORDB_PASSWORD:-}
+      - FALKORDB_SSL=${FALKORDB_SSL:-false}
+      - CORS_ORIGINS=${CORS_ORIGINS:-http://localhost,http://localhost:80,http://localhost:5173,http://127.0.0.1:5173}
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
+      - ADMIN_SECRET=${ADMIN_SECRET:-}
+    volumes:
+      - backend_data:/app/backend/data
+    depends_on:
+      - falkordb
+    restart: unless-stopped
+
+  # GraphSentinel AI React + Vite Frontend
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+      args:
+        - VITE_API_URL=${VITE_API_URL:-}
+    container_name: graphsentinel-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
 volumes:
   falkordb_data:
     name: graphsentinel_falkordb_data
+  backend_data:
+    name: graphsentinel_backend_data

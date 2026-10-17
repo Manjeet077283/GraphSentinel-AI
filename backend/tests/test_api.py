@@ -170,3 +170,120 @@ def test_admin_seed_authorization():
     data = res_ok.json()
     assert data["message"] == "FalkorDB graph seeded successfully."
     assert data["summary"]["status"] == "success"
+
+
+def test_auth_lifecycle():
+    # 1. Invalid login
+    res_bad = client.post("/api/auth/login", json={"email": "wrong@example.com", "password": "bad"})
+    assert res_bad.status_code == 401
+
+    # 2. Valid login with pre-seeded SRE account
+    res_login = client.post("/api/auth/login", json={"email": "sre@graphsentinel.ai", "password": "SREAdmin2026!"})
+    assert res_login.status_code == 200
+    auth_data = res_login.json()
+    assert "token" in auth_data
+    token = auth_data["token"]
+    assert auth_data["user"]["email"] == "sre@graphsentinel.ai"
+
+    # 3. Get profile /api/auth/me
+    res_me = client.get("/api/auth/me", headers={"Authorization": f"Bearer {token}"})
+    assert res_me.status_code == 200
+    assert res_me.json()["email"] == "sre@graphsentinel.ai"
+
+    # 4. Logout
+    res_logout = client.post("/api/auth/logout", headers={"Authorization": f"Bearer {token}"})
+    assert res_logout.status_code == 200
+
+    # 5. Token is now invalidated
+    res_revoked = client.get("/api/auth/me", headers={"Authorization": f"Bearer {token}"})
+    assert res_revoked.status_code == 401
+
+
+def test_incident_resolution_workflow():
+    # 1. Fetch resolution workflow for INC-001
+    res = client.get("/api/incidents/INC-001/resolution")
+    assert res.status_code == 200
+    data = res.json()
+    assert data["incident_id"] == "INC-001"
+    assert "summary" in data
+    assert "whats_happening" in data["summary"]
+    assert len(data["summary"]["confirmed_facts"]) > 0
+    assert "likely_cause" in data["summary"]
+    assert "recommended_solution" in data["summary"]
+    assert len(data["steps"]) >= 3
+
+    step_1 = data["steps"][0]
+    step_id = step_1["id"]
+
+    # 2. Update step status to IN_PROGRESS
+    res_update = client.patch(
+        f"/api/incidents/INC-001/resolution/steps/{step_id}",
+        json={"status": "IN_PROGRESS", "actor": "Test SRE"}
+    )
+    assert res_update.status_code == 200
+    assert res_update.json()["status"] == "IN_PROGRESS"
+
+    # 3. Update step status to COMPLETED
+    res_comp = client.patch(
+        f"/api/incidents/INC-001/resolution/steps/{step_id}",
+        json={"status": "COMPLETED", "actor": "Test SRE"}
+    )
+    assert res_comp.status_code == 200
+    assert res_comp.json()["status"] == "COMPLETED"
+
+    # 4. Verify recovery signals
+    res_verify = client.post(
+        "/api/incidents/INC-001/resolution/verify",
+        json={"checklist_overrides": {"canary_signoff": True}}
+    )
+    assert res_verify.status_code == 200
+    v_data = res_verify.json()
+    assert "signals" in v_data
+    assert len(v_data["signals"]) >= 4
+
+    # 5. Resolve incident
+    res_resolve = client.post(
+        "/api/incidents/INC-001/resolve",
+        json={
+            "root_cause_conclusion": "Postgres connection pool exhausted by unindexed batch query.",
+            "actions_taken": "Tuned pool limit and cancelled blocked transactions.",
+            "verification_outcome": "P99 latency stabilized below 120ms with 0 timeouts.",
+            "resolution_notes": "Added missing index on payments.created_at.",
+            "resolved_by": "Test SRE"
+        }
+    )
+    assert res_resolve.status_code == 200
+    assert res_resolve.json()["status"] == "success"
+
+    # Verify incident status updated to RESOLVED in FalkorDB
+    inc_detail = client.get("/api/incidents/INC-001").json()
+    assert inc_detail["status"] == "RESOLVED"
+
+    # 6. Reopen incident
+    res_reopen = client.post(
+        "/api/incidents/INC-001/reopen",
+        json={"reason": "Testing reopen workflow", "reopened_by": "Test SRE"}
+    )
+    assert res_reopen.status_code == 200
+    assert res_reopen.json()["status"] == "success"
+
+    # Verify incident status returned to INVESTIGATING
+    inc_reopened = client.get("/api/incidents/INC-001").json()
+    assert inc_reopened["status"] == "INVESTIGATING"
+
+
+def test_global_search():
+    # 1. Search for service
+    res_svc = client.get("/api/search?q=payment")
+    assert res_svc.status_code == 200
+    svc_data = res_svc.json()
+    assert len(svc_data["results"]) > 0
+    assert any(r["type"] == "service" for r in svc_data["results"])
+
+    # 2. Search for incident
+    res_inc = client.get("/api/overview/search?q=INC-001")
+    assert res_inc.status_code == 200
+    inc_data = res_inc.json()
+    assert len(inc_data["results"]) > 0
+    assert any(r["type"] == "incident" for r in inc_data["results"])
+

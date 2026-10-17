@@ -14,20 +14,30 @@ logger = logging.getLogger("graphsentinel.database")
 
 _client_instance: Optional[FalkorDB] = None
 
+def reset_falkordb_client() -> None:
+    """Reset the cached FalkorDB client instance so fresh settings are used."""
+    global _client_instance
+    _client_instance = None
+
 def get_falkordb_client() -> FalkorDB:
     """Return a FalkorDB client configured from application settings."""
     global _client_instance
     if _client_instance is None:
-        kwargs: Dict[str, Any] = {
-            "host": settings.FALKORDB_HOST,
-            "port": settings.FALKORDB_PORT,
-        }
-        if settings.FALKORDB_USERNAME:
-            kwargs["username"] = settings.FALKORDB_USERNAME
-        if settings.FALKORDB_PASSWORD:
-            kwargs["password"] = settings.FALKORDB_PASSWORD
-        
-        _client_instance = FalkorDB(**kwargs)
+        if settings.FALKORDB_URL:
+            _client_instance = FalkorDB.from_url(settings.FALKORDB_URL)
+        else:
+            kwargs: Dict[str, Any] = {
+                "host": settings.FALKORDB_HOST,
+                "port": settings.FALKORDB_PORT,
+            }
+            if settings.FALKORDB_SSL:
+                kwargs["ssl"] = True
+            if settings.FALKORDB_USERNAME:
+                kwargs["username"] = settings.FALKORDB_USERNAME
+            if settings.FALKORDB_PASSWORD:
+                kwargs["password"] = settings.FALKORDB_PASSWORD
+            
+            _client_instance = FalkorDB(**kwargs)
     return _client_instance
 
 def get_graph(graph_name: Optional[str] = None) -> Graph:
@@ -39,6 +49,8 @@ def get_graph(graph_name: Optional[str] = None) -> Graph:
 def check_database_health() -> Dict[str, Any]:
     """Perform a live health probe against FalkorDB and return connectivity status."""
     start_time = time.time()
+    tls_tag = " (TLS)" if settings.FALKORDB_SSL else ""
+    target_display = f"{settings.FALKORDB_HOST}:{settings.FALKORDB_PORT}{tls_tag}"
     try:
         client = get_falkordb_client()
         # Test basic command
@@ -51,16 +63,17 @@ def check_database_health() -> Dict[str, Any]:
             "connected": True,
             "latency_ms": latency_ms,
             "graph_name": settings.FALKORDB_GRAPH,
-            "target": f"{settings.FALKORDB_HOST}:{settings.FALKORDB_PORT}",
+            "target": target_display,
             "error": None
         }
     except Exception as e:
         latency_ms = round((time.time() - start_time) * 1000, 2)
         logger.warning(f"FalkorDB health check failed: {e}")
+        reset_falkordb_client()
         return {
             "connected": False,
             "latency_ms": latency_ms,
             "graph_name": settings.FALKORDB_GRAPH,
-            "target": f"{settings.FALKORDB_HOST}:{settings.FALKORDB_PORT}",
+            "target": target_display,
             "error": str(e)
         }
