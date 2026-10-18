@@ -37,8 +37,9 @@ services:
         generateValue: true
 
   # GraphSentinel AI - React + Vite Frontend (Static Site on Global CDN)
-  - type: static_site
+  - type: web
     name: graphsentinel-frontend
+    runtime: static
     rootDir: frontend
     buildCommand: npm install && npm run build
     staticPublishPath: dist
