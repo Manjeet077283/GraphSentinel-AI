@@ -46,6 +46,9 @@ const getApiBase = (): string => {
     if (!normalized.startsWith('http://') && !normalized.startsWith('https://') && !normalized.startsWith('/')) {
       normalized = `https://${normalized}`;
     }
+    if (normalized === 'https://graphsentinel-backend' || normalized === 'http://graphsentinel-backend' || normalized.endsWith('/graphsentinel-backend')) {
+      normalized = 'https://graphsentinel-backend.onrender.com';
+    }
     return normalized;
   }
   if (typeof window !== 'undefined' && window.location) {
