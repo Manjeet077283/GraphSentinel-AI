@@ -26,7 +26,7 @@ services:
       - key: FALKORDB_GRAPH
         value: graphsentinel-ai
       - key: FALKORDB_SSL
-        value: "true"
+        value: "false"
       - key: CORS_ORIGINS
         sync: false
       - key: GEMINI_API_KEY
