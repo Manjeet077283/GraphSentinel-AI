@@ -4,7 +4,7 @@
   color-scheme: light;
 }
 
-body {
+html, body {
   margin: 0;
   padding: 0;
   background-color: #f8fafc;
@@ -13,9 +13,17 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   min-height: 100vh;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
-/* Custom Clean Scrollbar for Light Theme */
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+/* -----------------------------------------------------------------------------
+   Default Light Scrollbar
+   ----------------------------------------------------------------------------- */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -34,7 +42,9 @@ body {
   background: #94a3b8;
 }
 
-/* Cytoscape Light Canvas Container */
+/* -----------------------------------------------------------------------------
+   Default Light Cytoscape Canvas Container
+   ----------------------------------------------------------------------------- */
 .cytoscape-container {
   width: 100%;
   height: 100%;
@@ -42,4 +52,163 @@ body {
   background-color: #ffffff;
   background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
   background-size: 20px 20px;
+}
+
+/* Table Overflow Protection */
+table {
+  max-width: 100%;
+}
+
+/* Code & Pre Blocks */
+pre, code {
+  font-family: 'JetBrains Mono', monospace;
+  word-break: break-word;
+}
+
+/* =============================================================================
+   DARK MODE OVERRIDES (Active ONLY when user selects Dark Mode via toggle)
+   Scoped strictly under `.dark` so fresh visits are 100% original light theme
+   ============================================================================= */
+
+html.dark {
+  color-scheme: dark;
+}
+
+html.dark body {
+  background-color: #0B0F17;
+  color: #F1F5F9;
+}
+
+/* Dark Mode Surfaces & Containers */
+.dark .bg-white {
+  background-color: #0E1524 !important;
+}
+
+.dark .bg-slate-50 {
+  background-color: #0B0F17 !important;
+}
+
+.dark .bg-slate-100 {
+  background-color: #131E32 !important;
+}
+
+.dark .hover\:bg-slate-50:hover {
+  background-color: #131E32 !important;
+}
+
+.dark .hover\:bg-slate-100:hover {
+  background-color: #17243C !important;
+}
+
+/* Dark Mode Text Hierarchy */
+.dark .text-slate-900 {
+  color: #F8FAFC !important;
+}
+
+.dark .text-slate-800 {
+  color: #F1F5F9 !important;
+}
+
+.dark .text-slate-700 {
+  color: #E2E8F0 !important;
+}
+
+.dark .text-slate-600 {
+  color: #CBD5E1 !important;
+}
+
+.dark .text-slate-500 {
+  color: #94A3B8 !important;
+}
+
+.dark .text-slate-400 {
+  color: #64748B !important;
+}
+
+/* Dark Mode Borders & Dividers */
+.dark .border-slate-200 {
+  border-color: rgba(51, 65, 85, 0.6) !important;
+}
+
+.dark .border-slate-100 {
+  border-color: rgba(30, 41, 59, 0.8) !important;
+}
+
+.dark .border-slate-300 {
+  border-color: rgba(71, 85, 105, 0.7) !important;
+}
+
+.dark .divide-slate-100 > :not([hidden]) ~ :not([hidden]) {
+  border-color: rgba(30, 41, 59, 0.8) !important;
+}
+
+.dark .divide-slate-200 > :not([hidden]) ~ :not([hidden]) {
+  border-color: rgba(51, 65, 85, 0.6) !important;
+}
+
+/* Dark Mode Accent Adjustments */
+.dark .text-indigo-600,
+.dark .text-indigo-700 {
+  color: #06B6D4 !important;
+}
+
+.dark .hover\:text-indigo-600:hover,
+.dark .hover\:text-indigo-800:hover {
+  color: #22D3EE !important;
+}
+
+.dark .bg-indigo-600 {
+  background-color: #0891B2 !important;
+}
+
+.dark .hover\:bg-indigo-700:hover {
+  background-color: #06B6D4 !important;
+  color: #020617 !important;
+}
+
+.dark .bg-indigo-50 {
+  background-color: rgba(8, 145, 178, 0.15) !important;
+}
+
+.dark .border-indigo-100,
+.dark .border-indigo-200 {
+  border-color: rgba(6, 182, 212, 0.3) !important;
+}
+
+/* Dark Mode Inputs & Form Controls */
+.dark input[type="text"],
+.dark input[type="email"],
+.dark input[type="password"],
+.dark input[type="search"],
+.dark textarea,
+.dark select {
+  background-color: #131E32 !important;
+  color: #F8FAFC !important;
+  border-color: rgba(71, 85, 105, 0.7) !important;
+}
+
+.dark input:focus,
+.dark textarea:focus,
+.dark select:focus {
+  border-color: #06B6D4 !important;
+  outline: none !important;
+}
+
+/* Dark Mode Scrollbars */
+.dark ::-webkit-scrollbar-track {
+  background: #0B0F17;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #1E293B;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #334155;
+}
+
+/* Dark Mode Cytoscape Canvas Container */
+.dark .cytoscape-container {
+  background-color: #0A0E17;
+  background-image: radial-gradient(#1E293B 1px, transparent 1px);
 }
