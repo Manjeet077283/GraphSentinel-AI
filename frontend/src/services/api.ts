@@ -42,7 +42,11 @@ const getApiBase = (): string => {
     if (trimmed === '') {
       return ''; // Explicitly configured for same-origin / reverse-proxy deployments
     }
-    return trimmed.replace(/\/+$/, '').replace('://localhost:8000', '://127.0.0.1:8000');
+    let normalized = trimmed.replace(/\/+$/, '').replace('://localhost:8000', '://127.0.0.1:8000');
+    if (!normalized.startsWith('http://') && !normalized.startsWith('https://') && !normalized.startsWith('/')) {
+      normalized = `https://${normalized}`;
+    }
+    return normalized;
   }
   if (typeof window !== 'undefined' && window.location) {
     const hostname = window.location.hostname;

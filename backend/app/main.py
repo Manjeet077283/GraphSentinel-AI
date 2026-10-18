@@ -34,7 +34,7 @@ allow_all_origins = "*" in settings.cors_origins
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"] if allow_all_origins else settings.cors_origins,
-    allow_origin_regex=None if (allow_all_origins or settings.IS_PRODUCTION) else r"^https?://(localhost|127\.0\.0\.1|\[::1\])(:\d+)?$",
+    allow_origin_regex=None if allow_all_origins else r"^https?://(localhost|127\.0\.0\.1|\[::1\])(:\d+)?$|^https://.*\.onrender\.com$",
     allow_credentials=not allow_all_origins,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -65,6 +65,13 @@ def root_status():
         "overview": "/api/overview",
         "synthetic_dataset": True
     }
+
+
+@app.get("/health", tags=["Health"])
+def root_health():
+    """Top-level healthcheck endpoint alias for cloud orchestrators (Render, k8s, AWS)."""
+    from backend.app.routes.health import get_health
+    return get_health()
 
 
 @app.exception_handler(Exception)
